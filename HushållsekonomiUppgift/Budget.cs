@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    internal class Budget
+    public class Budget
     {
         List<Inkomster> inkomster = new List<Inkomster>();
         List<Utgifter> utgifter = new List<Utgifter>();

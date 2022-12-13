@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HushållsekonomiUppgift", "HushållsekonomiUppgift\HushållsekonomiUppgift.csproj", "{5610FD75-601E-46A7-9401-13113532A3EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HushållsekonomiUppgift", "HushållsekonomiUppgift\HushållsekonomiUppgift.csproj", "{5610FD75-601E-46A7-9401-13113532A3EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{5AE3C65D-D57E-4A94-B7B3-FD90235CE9F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HushållsekonomiUppgiftTests", "HushållsekonomiUppgiftTests\HushållsekonomiUppgiftTests.csproj", "{3D6B6B40-D718-46D9-A1BC-59996EA4974B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5610FD75-601E-46A7-9401-13113532A3EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5610FD75-601E-46A7-9401-13113532A3EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5610FD75-601E-46A7-9401-13113532A3EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AE3C65D-D57E-4A94-B7B3-FD90235CE9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AE3C65D-D57E-4A94-B7B3-FD90235CE9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AE3C65D-D57E-4A94-B7B3-FD90235CE9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AE3C65D-D57E-4A94-B7B3-FD90235CE9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D6B6B40-D718-46D9-A1BC-59996EA4974B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D6B6B40-D718-46D9-A1BC-59996EA4974B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D6B6B40-D718-46D9-A1BC-59996EA4974B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D6B6B40-D718-46D9-A1BC-59996EA4974B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace UnitTestProject1
         public void AdderaInkomsterTest()
         {
             // Arrange
-            var sut = new Budget();
+            var sut = new Budgetawdawd();
             var expected = 26000;
             // Act
             var actual = budget.AdderaInkomster();
