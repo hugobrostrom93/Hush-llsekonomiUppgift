@@ -14,8 +14,11 @@ namespace HushållsekonomiUppgift
 
         public void AddLists()
         {
+            // Inkomster i form av lön + studiemedel
             inkomster.Add(new Inkomster(12000, 14000));
+            // Utgifter
             utgifter.Add(new Utgifter(899, 7500, 6000, 499, 499, 350, 99, 99));
+            // Kalkylerade utgifter i from av sparande och oanade utfigter i % som räknas ner längre ner
             kalkyleradeUtgifter.Add(new KalkyleradeUtgifter(10, 20));
         }
 
