@@ -10,7 +10,7 @@ namespace HushållsekonomiUppgift
     {
         // Läsa in en secret connection string
         // Koppla sig till en databas
-        // Koppla ner från databasen        
+        // Koppla ner från databasen
         
         public void AddPeopleToDB()
         {
@@ -19,6 +19,12 @@ namespace HushållsekonomiUppgift
         public void AddEconomyToDB()
         {
 
+        }
+        
+        // Koppla ihop personer med deras ekonomi
+        public void LinkPersonToEconomy()
+        {
+            
         }
     }
 }
