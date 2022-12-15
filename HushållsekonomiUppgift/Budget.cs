@@ -12,8 +12,12 @@ namespace HushållsekonomiUppgift
         List<Utgifter> utgifter = new List<Utgifter>();
         List<KalkyleradeUtgifter> kalkyleradeUtgifter = new List<KalkyleradeUtgifter>();
 
+
+        
         public void AddLists()
         {
+            // Gör så att denna metoden hämtar en lista från vår databas istället med värden
+
             // Inkomster i form av lön + studiemedel
             inkomster.Add(new Inkomster(12000, 14000));
             // Utgifter
@@ -84,7 +88,8 @@ namespace HushållsekonomiUppgift
             AddLists();
             Console.WriteLine($"Summan av inkomsterna är {AdderaInkomster()}kr\n");
             Console.WriteLine($"Summan av utgifterna är {AdderaUtgifter()}kr\n");
-            Console.WriteLine($"Summan av det du har sparat för månaden är {Sparat(AdderaInkomster())}kr. Alltså 10% av din inkomst\n");
+            // Spara 10% av det vi har kvar efter våra utgifter
+            Console.WriteLine($"Summan av det du har sparat för månaden är {Sparat(CashKvar())}kr. Alltså 10% av det du har kvar efter alla utgifter\n");
             Console.WriteLine($"Summan av dina oanade utgifter är {OanadeUtgifter(AdderaInkomster())}kr. Alltså 20% av din inkomst\n");
             Console.WriteLine($"Summan av pengarna du har kvar efter att ha betalat alla dina utgifter är {CashKvar()}kr\n");
         }
