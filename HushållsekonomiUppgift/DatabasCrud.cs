@@ -6,7 +6,6 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-//using MySql.Data.MySqlClient;
 using MySqlConnector;
 
 
@@ -36,7 +35,6 @@ namespace HushållsekonomiUppgift
 
             var cnn = new MySqlConnection(connString);
             cnn.Open();
-            //Console.WriteLine($"Using Database: {cnn.Database}");
             var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
             var cmd = new MySqlCommand(sql, cnn);
 
