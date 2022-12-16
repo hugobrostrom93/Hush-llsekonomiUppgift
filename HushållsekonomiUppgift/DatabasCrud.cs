@@ -11,133 +11,111 @@ using MySqlConnector;
 
 namespace HushållsekonomiUppgift
 {
-    internal class DatabasCrud
+    internal class DatabasCrud : Connection
     {
         // Läsa in en secret connection string
         // Koppla sig till en databas
         // Koppla ner från databasen
 
-
-        DataTable dt = new DataTable();                
-        MySqlDataAdapter adt = new MySqlDataAdapter(); 
-        string sql = "";                              
-        string connString = "";
-        MySqlConnection cnn = null;
-
-        public DatabasCrud()
-        {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string secret = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
-            cnn = new MySqlConnection(secret);
-            cnn.Open();
-        }
-
         public void GetTable()
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
-
             // Eventuellt lägga till så den söker igenom om person redan finns i listan
-
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
-
-            var dt = new DataTable();
-
-            var sql = "SELECT "                                    //SQL kod som väljer allt.
-            + "FROM EkonomiPerson ";                               //SQL kod, vilken tabell som ska användas, som skickas in (sen)
-            var adt = new MySqlDataAdapter(sql, cnn);              //tar med parameter från sql koden och skickar till databasen. 
-
-            adt.Fill(dt);                                          //hämtar data från databasen som gör så att vi ska kunna se den. 
-            Console.WriteLine("\n" + dt.Rows.Count);
-            Console.WriteLine();
-
-            if (dt.Rows.Count > 0)
+            using (var cnn = new MySqlConnection(ConnString))
             {
-                foreach (DataRow row in dt.Rows)
+                var sql = "SELECT "                                    //SQL kod som väljer allt.
+            + "FROM EkonomiPerson ";                         //SQL kod, vilken tabell som ska användas, som skickas in (sen)
+                var cmd = new MySqlCommand(sql, cnn);
+                var adt = new MySqlDataAdapter(cmd);              //tar med parameter från sql koden och skickar till databasen. 
+
+                adt.Fill(dt);                                          //hämtar data från databasen som gör så att vi ska kunna se den. 
+            }
+                Console.WriteLine("\n" + dt.Rows.Count);
+                Console.WriteLine();
+
+                if (dt.Rows.Count > 0)
                 {
-                    Console.WriteLine(row["Table"]);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        Console.WriteLine(row["Table"]);
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("No rows found.");
-            }
-            cnn.Close();
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
         }
 
 
 
         public void AddPeopleToDB()
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
+
 
             // Eventuellt lägga till så den söker igenom om person redan finns i listan
+            using (var cnn = new MySqlConnection(ConnString))
+            {
 
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
-            var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
-            var cmd = new MySqlCommand(sql, cnn);
-
-
-            Console.WriteLine("");
-            Console.WriteLine("Ange ditt förnamn: ");
-            cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
-
-            Console.WriteLine("Ange ditt efternamn: ");
-            cmd.Parameters.AddWithValue("@Efternamn", Console.ReadLine());
-
-            Console.WriteLine("");
-            Console.WriteLine("Grymt! Nu är det dags att planera din ekonomi");
-            Console.WriteLine("Vi börjar med att beräkna dina inkomster!");
-            Console.WriteLine("");
-
-            Console.WriteLine("Ange vilken månad du vill planera för: ");
-            var svar = cmd.Parameters.AddWithValue("@Månad", Console.ReadLine());
-            
-            Console.WriteLine("Ange hur mycket lön du kommer att få in denna månad:");
-            cmd.Parameters.AddWithValue("@Lön", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket studiemedel du kommer att få in denna månad:");
-            cmd.Parameters.AddWithValue("@Studiemedel", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket bidrag du kommer att få in denna månad:");
-            cmd.Parameters.AddWithValue("@Bidrag", Console.ReadLine());
-
-            Console.WriteLine("");
-            Console.WriteLine("Tack. Nu är det dags för att beräkna dina utgifter!");
-            Console.WriteLine("");
-
-            Console.WriteLine("Ange hur mycket el du betalar per månad:");
-            cmd.Parameters.AddWithValue("@El", Console.ReadLine());
-
-            Console.WriteLine("Ange hyra du betalar per månad:");
-            cmd.Parameters.AddWithValue("@Hyra", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket mat du planerar att handla för under denna månad:");
-            cmd.Parameters.AddWithValue("@Mat", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket du betalar för gym per månad:");
-            cmd.Parameters.AddWithValue("@Gym", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket du betalar för din telefon per månad:");
-            cmd.Parameters.AddWithValue("@Telefon", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket du betalar för internet per månad:");
-            cmd.Parameters.AddWithValue("@Internet", Console.ReadLine());
-
-            Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
-            cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
+                var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
+                var cmd = new MySqlCommand(sql, cnn);
 
 
-            cmd.ExecuteNonQuery();
-            Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
+                Console.WriteLine("");
+                Console.WriteLine("Ange ditt förnamn: ");
+                cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
 
-            // Skriv ut beräkningar, alltså vad den har kvar att spendera + oanade utgifter (25%) + spara (10%)
+                Console.WriteLine("Ange ditt efternamn: ");
+                cmd.Parameters.AddWithValue("@Efternamn", Console.ReadLine());
 
-            Console.ReadLine();
-            cnn.Close();
+                Console.WriteLine("");
+                Console.WriteLine("Grymt! Nu är det dags att planera din ekonomi");
+                Console.WriteLine("Vi börjar med att beräkna dina inkomster!");
+                Console.WriteLine("");
+
+                Console.WriteLine("Ange vilken månad du vill planera för: ");
+                var svar = cmd.Parameters.AddWithValue("@Månad", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket lön du kommer att få in denna månad:");
+                cmd.Parameters.AddWithValue("@Lön", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket studiemedel du kommer att få in denna månad:");
+                cmd.Parameters.AddWithValue("@Studiemedel", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket bidrag du kommer att få in denna månad:");
+                cmd.Parameters.AddWithValue("@Bidrag", Console.ReadLine());
+
+                Console.WriteLine("");
+                Console.WriteLine("Tack. Nu är det dags för att beräkna dina utgifter!");
+                Console.WriteLine("");
+
+                Console.WriteLine("Ange hur mycket el du betalar per månad:");
+                cmd.Parameters.AddWithValue("@El", Console.ReadLine());
+
+                Console.WriteLine("Ange hyra du betalar per månad:");
+                cmd.Parameters.AddWithValue("@Hyra", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket mat du planerar att handla för under denna månad:");
+                cmd.Parameters.AddWithValue("@Mat", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket du betalar för gym per månad:");
+                cmd.Parameters.AddWithValue("@Gym", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket du betalar för din telefon per månad:");
+                cmd.Parameters.AddWithValue("@Telefon", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket du betalar för internet per månad:");
+                cmd.Parameters.AddWithValue("@Internet", Console.ReadLine());
+
+                Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
+                cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
+
+
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
+
+                // Skriv ut beräkningar, alltså vad den har kvar att spendera + oanade utgifter (25%) + spara (10%)
+
+                Console.ReadLine();
+            }
         }
 
         
