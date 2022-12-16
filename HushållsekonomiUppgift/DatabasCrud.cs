@@ -32,42 +32,6 @@ namespace HushållsekonomiUppgift
             cnn.Open();
         }
 
-        public void GetTable()
-        {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
-
-            // Eventuellt lägga till så den söker igenom om person redan finns i listan
-
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
-
-            var dt = new DataTable();
-
-            var sql = "SELECT "                                    //SQL kod som väljer allt.
-            + "FROM EkonomiPerson ";                               //SQL kod, vilken tabell som ska användas, som skickas in (sen)
-            var adt = new MySqlDataAdapter(sql, cnn);              //tar med parameter från sql koden och skickar till databasen. 
-
-            adt.Fill(dt);                                          //hämtar data från databasen som gör så att vi ska kunna se den. 
-            Console.WriteLine("\n" + dt.Rows.Count);
-            Console.WriteLine();
-
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Console.WriteLine(row["Table"]);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No rows found.");
-            }
-            cnn.Close();
-        }
-
-
-
         public void AddPeopleToDB()
         {
             var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
