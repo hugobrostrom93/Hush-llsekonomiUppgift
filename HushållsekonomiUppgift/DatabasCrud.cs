@@ -98,7 +98,7 @@ namespace HushållsekonomiUppgift
             cnn.Close();
         }
 
-
+        
 
         // Koden nedan är ifall vi vill ha olika listor för person och ekonomi vilket känns VÄLDIGT ONÖDIGT 
 

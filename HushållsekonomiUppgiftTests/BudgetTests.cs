@@ -29,5 +29,7 @@ namespace HushållsekonomiUppgift.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+
     }
 }
