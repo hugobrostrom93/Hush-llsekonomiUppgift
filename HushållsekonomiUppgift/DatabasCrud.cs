@@ -20,29 +20,38 @@ namespace HushållsekonomiUppgift
         public void GetTable()
         {
             // Eventuellt lägga till så den söker igenom om person redan finns i listan
-            using (var cnn = new MySqlConnection(ConnString))
-            {
-                var sql = "SELECT "                                    //SQL kod som väljer allt.
-            + "FROM EkonomiPerson ";                         //SQL kod, vilken tabell som ska användas, som skickas in (sen)
-                var cmd = new MySqlCommand(sql, cnn);
-                var adt = new MySqlDataAdapter(cmd);              //tar med parameter från sql koden och skickar till databasen. 
+
+            var cnn = new MySqlConnection(connString);
+            cnn.Open();
+
+            var dt = new DataTable();
+
+            var sql = "SELECT *"                                   //SQL kod som väljer allt.
+            + "FROM EkonomiPerson ";                               //SQL kod, vilken tabell som ska användas, som skickas in (sen)
+            var adt = new MySqlDataAdapter(sql, cnn);              //tar med parameter från sql koden och skickar till databasen. 
 
                 adt.Fill(dt);                                          //hämtar data från databasen som gör så att vi ska kunna se den. 
             }
                 Console.WriteLine("\n" + dt.Rows.Count);
                 Console.WriteLine();
 
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
+
+            if (dt.Columns.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {                    
+                    foreach (DataColumn column in dt.Columns)
                     {
-                        Console.WriteLine(row["Table"]);
+                        Console.Write(row[column] + " ");
                     }
+                    Console.WriteLine();
                 }
-                else
-                {
-                    Console.WriteLine("No rows found.");
-                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
+            cnn.Close();
         }
 
 

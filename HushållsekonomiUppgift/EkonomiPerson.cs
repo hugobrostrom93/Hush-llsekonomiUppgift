@@ -27,8 +27,6 @@ namespace HushållsekonomiUppgift
 
         public int mat { get; set; }
 
-        public int oanadeutgifter { get; set; }
-
         public int gym { get; set; }
 
         public int telefon { get; set; }
@@ -39,9 +37,11 @@ namespace HushållsekonomiUppgift
 
         public int spotify { get; set; }       
 
-        public int inkomst { get; set; }
+        public decimal inkomst { get; set; }
 
-        public int utgifter { get; set; }
+        public decimal utgift { get; set; }
 
+        public int spara { get; set; }
+        public int oanadeutgifter { get; set; }
     }
 }
