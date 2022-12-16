@@ -93,6 +93,9 @@ namespace HushållsekonomiUppgift
 
             cmd.ExecuteNonQuery();
             Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
+
+            // Skriv ut beräkningar, alltså vad den har kvar att spendera + oanade utgifter + spara
+
             Console.ReadLine();
             cnn.Close();
         }

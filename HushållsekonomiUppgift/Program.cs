@@ -1,12 +1,13 @@
 ﻿using HushållsekonomiUppgift;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        string connString = @"Server=ns8.inleed.net;Database=s60127_MolnstersInc;Uid=[Insert Username];Pwd=[Insert Password];";
-        var databasCrud = new DatabasCrud(connString);
+        var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+        string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
 
         Console.WriteLine("+---------------------------------------+");
         Console.WriteLine("|Välkommen till Hushållsekonomi-Spararen|");
@@ -28,6 +29,9 @@ internal class Program
                 case ConsoleKey.NumPad2:
                     Environment.Exit(1);
                     break;
+
+                    // Ett case för att lista alla personer i databasen
+
                     //case ConsoleKey.D3:
                     //    movieCrud.AddActor(actor, movie);
                     //    break;
