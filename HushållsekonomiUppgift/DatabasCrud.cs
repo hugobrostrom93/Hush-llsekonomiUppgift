@@ -44,7 +44,7 @@ namespace HushållsekonomiUppgift
 
             var dt = new DataTable();
 
-            var sql = "SELECT "                                    //SQL kod som väljer allt.
+            var sql = "SELECT *"                                   //SQL kod som väljer allt.
             + "FROM EkonomiPerson ";                               //SQL kod, vilken tabell som ska användas, som skickas in (sen)
             var adt = new MySqlDataAdapter(sql, cnn);              //tar med parameter från sql koden och skickar till databasen. 
 
@@ -52,11 +52,16 @@ namespace HushållsekonomiUppgift
             Console.WriteLine("\n" + dt.Rows.Count);
             Console.WriteLine();
 
-            if (dt.Rows.Count > 0)
+
+            if (dt.Columns.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
-                {
-                    Console.WriteLine(row["Table"]);
+                {                    
+                    foreach (DataColumn column in dt.Columns)
+                    {
+                        Console.Write(row[column] + " ");
+                    }
+                    Console.WriteLine();
                 }
             }
             else

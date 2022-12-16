@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySqlConnector;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,41 +8,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace HushållsekonomiUppgift
 {
     public class Budget
     {
         MySqlConnection cnn = null;
-        public void TotalInkomst()
+        public decimal TotalInkomst(string förnamn)
         {
             var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
             string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
             var cnn = new MySqlConnection(connString);
             cnn.Open();
 
-            var sql = "SELECT Lön, Studiemedel, Bidrag FROM `EkonomiPerson` WHERE Förnamn = 'Donald';";
+            var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
+            decimal result = (decimal)cmd.ExecuteScalar();
             cnn.Close();
 
-            var dt = new DataTable();
-            var adt = new MySqlDataAdapter(sql, cnn);
-            adt.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Console.WriteLine($"Donald har: {row["Lön"]} i lön");
-                    Console.WriteLine($"Donald har: {row["Studiemedel"]} i studiemedel");
-                    Console.WriteLine($"Donald har: {row["Bidrag"]} i bidrag");
-                    var sum = row["Lön"] + row["Studiemedel"] + row["Bidrag"];
-                    Console.WriteLine(sum);
-                }
-            }
 
+            Console.WriteLine(result);
+            return result;
         }
 
+        public decimal TotalUtgift(string förnamn)
+        {
+            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
+            var cnn = new MySqlConnection(connString);
+            cnn.Open();
 
+            var sql = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+            var cmd = new MySqlCommand(sql, cnn);
+            cmd.ExecuteNonQuery();
+            decimal result = (decimal)cmd.ExecuteScalar();
+            cnn.Close();
+
+
+            Console.WriteLine(result);
+            return result;
+        }
 
         //public int AdderaInkomster()
         //{
@@ -110,7 +117,7 @@ namespace HushållsekonomiUppgift
         //    Console.WriteLine($"Summan av dina oanade utgifter är {OanadeUtgifter(AdderaInkomster())}kr. Alltså 20% av din inkomst\n");
         //    Console.WriteLine($"Summan av pengarna du har kvar efter att ha betalat alla dina utgifter är {CashKvar()}kr\n");
         //}
-
-
     }
 }
+
+
