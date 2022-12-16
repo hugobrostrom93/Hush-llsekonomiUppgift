@@ -6,6 +6,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        DatabasCrud databascrud = new DatabasCrud();
+
         var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
         string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
 
@@ -22,7 +24,8 @@ internal class Program
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    databasCrud.AddPeopleToDB();
+                    databascrud.GetTable();
+                   // databasCrud.AddPeopleToDB();
                     Console.WriteLine("");
                     break;
                 case ConsoleKey.D2:

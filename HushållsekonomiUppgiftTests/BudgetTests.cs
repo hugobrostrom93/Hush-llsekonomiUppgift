@@ -17,18 +17,18 @@ namespace HushållsekonomiUppgift.Tests
         Assert.Fail();
         }
 
-        [TestMethod]
-        public void AdderaInkomsterTest2()
-        {
-            // Arrange
-            var sut = new Budget();
-            sut.AddLists(); // Måste lägga till denna för att få in värden i listorna
-            var expected = 26000;
-            // Act
-            var actual = sut.AdderaInkomster();
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        //[TestMethod]
+        //public void AdderaInkomsterTest2()
+        //{
+        //    // Arrange
+        //    var sut = new Budget();
+        //    sut.AddLists(); // Måste lägga till denna för att få in värden i listorna
+        //    var expected = 26000;
+        //    // Act
+        //    var actual = sut.AdderaInkomster();
+        //    // Assert
+        //    Assert.AreEqual(expected, actual);
+        //}
 
 
     }
