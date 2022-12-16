@@ -50,7 +50,7 @@ namespace HushållsekonomiUppgift
             return sumUtgifter;
         }
         
-
+        
         public int Sparat(int pengar)
         {
             int sumSpara = 0;
