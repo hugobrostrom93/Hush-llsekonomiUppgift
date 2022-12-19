@@ -39,10 +39,16 @@ namespace HushållsekonomiUppgift
 
         public decimal inkomst { get; set; }
 
+        public decimal totalInkomst { get; set; }
+
         public decimal utgift { get; set; }
+
+        public decimal totalUtgift { get; set; }
 
         public decimal spara { get; set; }
 
         public decimal oanadeutgifter { get; set; }
+
+        public decimal kvar { get; set; }
     }
 }

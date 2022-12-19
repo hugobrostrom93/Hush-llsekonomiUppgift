@@ -16,12 +16,12 @@ namespace HushållsekonomiUppgift
         public decimal SummeraBudget(string förnamn)
         {
             EkonomiPerson person = new EkonomiPerson();
-            DatabasCrud databasCrud= new DatabasCrud();
+            DatabasCrud databasCrud = new DatabasCrud();
 
             var connString = databasCrud.Read("connString.txt");
             var cnn = new MySqlConnection(connString);
             cnn.Open();
-          
+
             // Summera inkomster
             var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
@@ -44,9 +44,10 @@ namespace HushållsekonomiUppgift
             person.spara = (person.inkomst * 10) / 100;
             Console.WriteLine($"Det {person.förnamn} ska spara när hen har fått lönen är {person.spara}kr (alltså 10% av lönen)");
             var kvar = person.inkomst - person.utgift - person.oanadeutgifter - person.spara;
-            Console.WriteLine($"Det {person.förnamn} har kvar att spendera efter alla hens utgifter + sparande är {kvar}kr");           //VASADU
+            Console.WriteLine($"Det {person.förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.kvar}kr");           //VASADU
             Console.WriteLine("");
-            return person.inkomst;
+            return person.totalInkomst;
+
         }
     }
 }
