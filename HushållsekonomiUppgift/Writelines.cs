@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
+
     internal class Writelines
     {
-        public void välkomsttext() 
+        Budget budget = new Budget();
+
+
+        public void välkomsttext()
         {
             Console.WriteLine("+---------------------------------------+");
             Console.WriteLine("|Välkommen till Hushållsekonomi-Spararen|");
@@ -16,5 +20,107 @@ namespace HushållsekonomiUppgift
             Console.WriteLine("");
 
         }
+
+        public void switchMeny()
+        {
+            Console.WriteLine("Välj ett av dessa alternativ:");
+            Console.WriteLine
+                ("1: Lägg till en person i listan " +
+                "\n2: Visa tabell " +
+                "\n3:Sök på persons tot inkomster och utgifter:");
+        }
+
+        public void sökaNamn()
+        {
+            Console.WriteLine("\nVilken person vill du söka på?");
+        }
+
+        public void SummeraUtgifterWR(string förnamn, EkonomiPerson person)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"{förnamn}s totala inkomster är {person.TotalInkomst}kr");
+            Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
+            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
+            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
+            person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
+            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
+            person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
+            Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
+            Console.WriteLine("");
+        }
+
+        public void FINNSINTE(string förnamn)
+        {
+            Console.WriteLine($"\nTvär finns inte {förnamn} i  DB\n");
+        }
+
+        public void AddToDbWlName()
+        {
+            Console.WriteLine("\nAnge ditt förnamn: ");
+        }
+
+        public void AddToDbWlLastName()
+        {
+            Console.WriteLine("\nAnge ditt efternamn: ");
+        }
+        public void AddToDbWlPlaneraEkonomi()
+        {
+            Console.WriteLine("\nGrymt! Nu är det dags att planera din ekonomi");
+            Console.WriteLine("Vi börjar med att beräkna dina inkomster!\n");
+        }
+        public void AddToDbWlMånad()
+        {
+            Console.WriteLine("Ange vilken månad du vill planera för: ");
+        }
+        public void AddToDbWlLön()
+        {
+            Console.WriteLine("Ange hur mycket lön du kommer att få in denna månad:");
+        }
+        public void AddToDbWlStudiemedel()
+        {
+            Console.WriteLine("Ange hur mycket studiemedel du kommer att få in denna månad:");
+        }
+        public void AddToDbWlBidrag()
+        {
+            Console.WriteLine("Ange hur mycket bidrag du kommer att få in denna månad:");
+        }
+        public void AddToDbWlBeräknaUtgifter()
+        {
+            Console.WriteLine("Tack. Nu är det dags för att beräkna dina utgifter!");
+        }
+        public void AddToDbWlEl()
+        {
+            Console.WriteLine("Ange hur mycket el du betalar per månad:");
+        }
+        public void AddToDbWlHyra()
+        {
+            Console.WriteLine("Ange hyra du betalar per månad:");
+        }
+        public void AddToDbWlMat()
+        {
+            Console.WriteLine("Ange hur mycket mat du planerar att handla för under denna månad:");
+        }
+        public void AddToDbWlGym()
+        {
+            Console.WriteLine("Ange hur mycket du betalar för gym per månad:");
+        }
+        public void AddToDbWlTel()
+        {
+            Console.WriteLine("Ange hur mycket du betalar för din telefon per månad:");
+        }
+        public void AddToDbWlInternet()
+        {
+            Console.WriteLine("Ange hur mycket du betalar för internet per månad:");
+        }
+        public void AddToDbWlspotify()
+        {
+            Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
+        }
+        public void AddToDBWlSpara()
+        {
+            Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
+            Console.WriteLine("");
+        }
+
     }
 }

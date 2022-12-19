@@ -15,6 +15,7 @@ namespace HushållsekonomiUppgift
     {
         public decimal SummeraBudget(string förnamn)
         {
+            Writelines writeline = new Writelines();
             EkonomiPerson person = new EkonomiPerson();
             DatabasCrud databasCrud = new DatabasCrud();
 
@@ -28,11 +29,11 @@ namespace HushållsekonomiUppgift
             cmd.ExecuteNonQuery();
             if (cmd.ExecuteScalar() != DBNull.Value)
             {
-             person.TotalInkomst = (decimal)cmd.ExecuteScalar();
+                person.TotalInkomst = (decimal)cmd.ExecuteScalar();
             }
             else
             {
-                Console.WriteLine($"Tvär finns inte {förnamn} i  DB" );
+                writeline.FINNSINTE(förnamn);
                 return person.TotalInkomst;
             }
 
@@ -42,29 +43,20 @@ namespace HushållsekonomiUppgift
             cmd2.ExecuteNonQuery();
             person.Utgift = (decimal)cmd2.ExecuteScalar();
 
-            cnn.Close();
+            writeline.SummeraUtgifterWR(förnamn, person);
 
-            Console.WriteLine("");
-            Console.WriteLine($"{förnamn}s totala inkomster är {person.Inkomst}kr");
-            Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
-            person.Oanadeutgifter = (person.Inkomst * 25) / 100;
-            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
-            person.Spara = (person.Inkomst * 10) / 100;
-            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
-            var kvar = person.Inkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
-            Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
-            Console.WriteLine("");
-            return person.TotalUtgift;
             if (person.TotalUtgift != null)
             {
                 person.TotalUtgift = (decimal)cmd.ExecuteScalar();
             }
             else
             {
-                Console.WriteLine($"Tvär finns inte {förnamn} i  DB");
+                writeline.FINNSINTE(förnamn);
                 return person.TotalUtgift;
             }
-                
+            cnn.Close();
+            return person.TotalUtgift;
+
         }
     }
 }

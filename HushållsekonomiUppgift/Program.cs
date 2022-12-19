@@ -20,11 +20,10 @@ internal class Program
         //var budget = new Budget();
 
         writelines.välkomsttext();
-    
+
         while (true)
         {
-            Console.WriteLine("Välj ett av dessa alternativ:");
-            Console.WriteLine("1: Lägg till en person i listan \n2: Visa tabell \n3:Sök på persons tot inkomst: \n4:Sök på persons tot utgifter:");
+            writelines.switchMeny();
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.D1:
@@ -34,17 +33,16 @@ internal class Program
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    databascrud.PrintList();
+                    //databascrud.PrintList();
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    Console.WriteLine("Vilken person vill du söka på?");
+                    writelines.sökaNamn();
                     ekonomiPerson.Förnamn = Console.ReadLine();
                     ekonomiPerson.TotalInkomst = budget.SummeraBudget(ekonomiPerson.Förnamn);
-                    Console.WriteLine(ekonomiPerson.TotalInkomst);
-                    //Console.WriteLine("");
+              
                     break;
-                
+
             }
         }
 

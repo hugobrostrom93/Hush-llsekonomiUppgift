@@ -14,7 +14,7 @@ namespace HushållsekonomiUppgift
 {
     internal class DatabasCrud
     {
-
+        Writelines writeline = new Writelines();
         PrintMetod print = new PrintMetod();
         DataTable dt = new DataTable();
         MySqlDataAdapter adt = new MySqlDataAdapter();
@@ -34,7 +34,7 @@ namespace HushållsekonomiUppgift
             cnn.Open();
         }
 
-        public void PrintList()
+        public void PrintList(string förnamn)
         {
             var connString = Read("connString.txt");
             var cnn = new MySqlConnection(connString);
@@ -61,19 +61,19 @@ namespace HushållsekonomiUppgift
             }
             else
             {
-                Console.WriteLine("Ingen person hittades.");
+                writeline.FINNSINTE(förnamn);
             }
             cnn.Close();
         }
 
-        public void PersonSök(string name)
+        public void PersonSök(string förnamn)
         {
             var connString = Read("connString.txt");
             var cnn = new MySqlConnection(connString);
 
             cnn.Open();
             dt = new DataTable();
-            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{name}';";
+            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}';";
             adt = new MySqlDataAdapter(sql, cnn);
             adt.Fill(dt);
 
@@ -96,7 +96,7 @@ namespace HushållsekonomiUppgift
             }
             else
             {
-                Console.WriteLine("Ingen person hittades.");
+                writeline.FINNSINTE(förnamn);
             }
         }
 
@@ -109,104 +109,97 @@ namespace HushållsekonomiUppgift
             var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
             var cmd = new MySqlCommand(sql, cnn);
 
-            Console.WriteLine("");
-            Console.WriteLine("Ange ditt förnamn: ");
+
+            writeline.AddToDbWlName();
             cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
 
-            Console.WriteLine("Ange ditt efternamn: ");
+            writeline.AddToDbWlLastName();
             cmd.Parameters.AddWithValue("@Efternamn", Console.ReadLine());
 
-            Console.WriteLine("");
-            Console.WriteLine("Grymt! Nu är det dags att planera din ekonomi");
-            Console.WriteLine("Vi börjar med att beräkna dina inkomster!");
-            Console.WriteLine("");
+            writeline.AddToDbWlPlaneraEkonomi();
 
-            Console.WriteLine("Ange vilken månad du vill planera för: ");
+            writeline.AddToDbWlMånad();
             var svar = cmd.Parameters.AddWithValue("@Månad", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket lön du kommer att få in denna månad:");
+            writeline.AddToDbWlLön();
             cmd.Parameters.AddWithValue("@Lön", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket studiemedel du kommer att få in denna månad:");
+            writeline.AddToDbWlStudiemedel();
             cmd.Parameters.AddWithValue("@Studiemedel", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket bidrag du kommer att få in denna månad:");
+            writeline.AddToDbWlBidrag();
             cmd.Parameters.AddWithValue("@Bidrag", Console.ReadLine());
 
-            Console.WriteLine("");
-            Console.WriteLine("Tack. Nu är det dags för att beräkna dina utgifter!");
-            Console.WriteLine("");
+            writeline.AddToDbWlBeräknaUtgifter();
 
-            Console.WriteLine("Ange hur mycket el du betalar per månad:");
+            writeline.AddToDbWlEl();
             cmd.Parameters.AddWithValue("@El", Console.ReadLine());
 
-            Console.WriteLine("Ange hyra du betalar per månad:");
+            writeline.AddToDbWlHyra();
             cmd.Parameters.AddWithValue("@Hyra", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket mat du planerar att handla för under denna månad:");
+            writeline.AddToDbWlMat();
             cmd.Parameters.AddWithValue("@Mat", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket du betalar för gym per månad:");
+            writeline.AddToDbWlGym();
             cmd.Parameters.AddWithValue("@Gym", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket du betalar för din telefon per månad:");
+            writeline.AddToDbWlTel();
             cmd.Parameters.AddWithValue("@Telefon", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket du betalar för internet per månad:");
+            writeline.AddToDbWlInternet();
             cmd.Parameters.AddWithValue("@Internet", Console.ReadLine());
 
-            Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
+            writeline.AddToDbWlspotify();
             cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
 
-
             cmd.ExecuteNonQuery();
-            Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
-            Console.WriteLine("");
+            writeline.AddToDBWlSpara();
 
             Console.ReadLine();
             cnn.Close();
         }
-        public List<EkonomiPerson> GetPerson()
-        {
-            var connString = Read("connString.txt");
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
+        //public List<EkonomiPerson> GetPerson()
+        //{
+        //    var connString = Read("connString.txt");
+        //    var cnn = new MySqlConnection(connString);
+        //    cnn.Open();
 
-            var sql = "SELECT * FROM EkonomiPerson";
-            var cmd = new MySqlCommand(sql, cnn);
-            var reader = cmd.ExecuteReader();
+        //    var sql = "SELECT * FROM EkonomiPerson";
+        //    var cmd = new MySqlCommand(sql, cnn);
+        //    var reader = cmd.ExecuteReader();
 
-            var personer = new List<EkonomiPerson>();
+        //    var personer = new List<EkonomiPerson>();
 
-            while (reader.Read())
-            {
-                EkonomiPerson person = new EkonomiPerson
-                {
-                    Förnamn = reader.GetString("Förnamn"),
-                    Efternamn = reader.GetString("Efternamn"),
-                    Månad = reader.GetString("Månad"),
-                    Lön = reader.GetDecimal("Lön"),
-                    Studiemedel = reader.GetDecimal("Studiemedel"),
-                    Bidrag = reader.GetDecimal("Bidrag"),
-                    El = reader.GetDecimal("El"),
-                    Hyra = reader.GetDecimal("Hyra"),
-                    Mat = reader.GetDecimal("Mat"),
-                    Gym = reader.GetDecimal("Gym"),
-                    Telefon = reader.GetDecimal("Telefon"),
-                    Internet = reader.GetDecimal("Internet"),
-                    Spotify = reader.GetDecimal("Spotify"),
-                    //Inkomst = reader.GetDecimal("Inkomst"),
-                    //TotalInkomst = reader.GetDecimal("TotalInkomst"),
-                    //Utgift = reader.GetDecimal("Utgift"),
-                    //TotalUtgift = reader.GetDecimal("TotalUtgift"),
-                    //Spara = reader.GetDecimal("Spara"),
-                    //Oanadeutgifter = reader.GetDecimal("Oanadeutgifter"),
-                    //Kvar = reader.GetDecimal("Kvar"),
-                };
-                personer.Add(person);
-            }
-            cnn.Close();
-            return personer;
-        }
+        //    while (reader.Read())
+        //    {
+        //        EkonomiPerson person = new EkonomiPerson
+        //        {
+        //            Förnamn = reader.GetString("Förnamn"),
+        //            Efternamn = reader.GetString("Efternamn"),
+        //            Månad = reader.GetString("Månad"),
+        //            Lön = reader.GetDecimal("Lön"),
+        //            Studiemedel = reader.GetDecimal("Studiemedel"),
+        //            Bidrag = reader.GetDecimal("Bidrag"),
+        //            El = reader.GetDecimal("El"),
+        //            Hyra = reader.GetDecimal("Hyra"),
+        //            Mat = reader.GetDecimal("Mat"),
+        //            Gym = reader.GetDecimal("Gym"),
+        //            Telefon = reader.GetDecimal("Telefon"),
+        //            Internet = reader.GetDecimal("Internet"),
+        //            Spotify = reader.GetDecimal("Spotify"),
+        //            //Inkomst = reader.GetDecimal("Inkomst"),
+        //            //TotalInkomst = reader.GetDecimal("TotalInkomst"),
+        //            //Utgift = reader.GetDecimal("Utgift"),
+        //            //TotalUtgift = reader.GetDecimal("TotalUtgift"),
+        //            //Spara = reader.GetDecimal("Spara"),
+        //            //Oanadeutgifter = reader.GetDecimal("Oanadeutgifter"),
+        //            //Kvar = reader.GetDecimal("Kvar"),
+        //        };
+        //        personer.Add(person);
+        //    }
+        //    cnn.Close();
+        //    return personer;
+        //}
     }
 }
