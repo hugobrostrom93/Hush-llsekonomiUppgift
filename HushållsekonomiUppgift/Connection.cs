@@ -14,6 +14,6 @@ namespace HushållsekonomiUppgift
         protected static string ConnString { get; set; } = File.ReadAllText(Path);
         protected DataTable dt = new DataTable();
         protected MySqlDataAdapter adt = new MySqlDataAdapter();
-        protected MySqlConnection cnn = null;
+        protected MySqlConnection cnn = new MySqlConnection(ConnString);
     }
 }

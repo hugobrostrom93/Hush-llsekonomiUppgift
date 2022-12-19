@@ -11,43 +11,36 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    public class Budget
+    internal class Budget : Connection
     {
         MySqlConnection cnn = null;
         public decimal TotalInkomst(string förnamn)
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
-            var cnn = new MySqlConnection(connString);
             cnn.Open();
-
-            var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+                var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
             decimal result = (decimal)cmd.ExecuteScalar();
-            cnn.Close();
-
 
             Console.WriteLine(result);
             return result;
+            cnn.Close();
         }
 
         public decimal TotalUtgift(string förnamn)
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            string connString = @$"Server={config["Server"]};Database={config["Database"]};Uid={config["Uid"]};Pwd={config["Pwd"]};";
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
+            using (var cnn = new MySqlConnection(ConnString))
+            {
+                var sql = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+                var cmd = new MySqlCommand(sql, cnn);
+                cmd.ExecuteNonQuery();
+                decimal result = (decimal)cmd.ExecuteScalar();
 
-            var sql = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
-            var cmd = new MySqlCommand(sql, cnn);
-            cmd.ExecuteNonQuery();
-            decimal result = (decimal)cmd.ExecuteScalar();
-            cnn.Close();
-
-
-            Console.WriteLine(result);
-            return result;
+                Console.WriteLine(result);
+                return result;
+            }
+            }
+        
         }
 
         //public int AdderaInkomster()
@@ -118,6 +111,6 @@ namespace HushållsekonomiUppgift
         //    Console.WriteLine($"Summan av pengarna du har kvar efter att ha betalat alla dina utgifter är {CashKvar()}kr\n");
         //}
     }
-}
+
 
 
