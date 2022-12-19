@@ -9,46 +9,46 @@ namespace HushållsekonomiUppgift
     internal class EkonomiPerson
     {
         // Används inte i koden än men tänker att vi lär behöva det senare
-        public string förnamn { get; set; }
+        public string Förnamn { get; set; }
 
-        public string efternamn { get; set; }
+        public string Efternamn { get; set; }
 
-        public string månad { get; set; }
+        public string Månad { get; set; }
 
-        public decimal lön { get; set; }
+        public decimal Lön { get; set; }
 
-        public decimal studiemedel { get; set; }
+        public decimal Studiemedel { get; set; }
 
-        public decimal bidrag { get; set; }
+        public decimal Bidrag { get; set; }
 
-        public decimal el { get; set; }
+        public decimal El { get; set; }
 
-        public decimal hyra { get; set; }
+        public decimal Hyra { get; set; }
 
-        public decimal mat { get; set; }
+        public decimal Mat { get; set; }
 
-        public decimal gym { get; set; }
+        public decimal Gym { get; set; }
 
-        public decimal telefon { get; set; }
+        public decimal Telefon { get; set; }
 
-        public decimal internet { get; set; }
+        public decimal Internet { get; set; }
 
-        public decimal netflix { get; set; }
+        public decimal Netflix { get; set; }
 
-        public decimal spotify { get; set; }       
+        public decimal Spotify { get; set; }       
 
-        public decimal inkomst { get; set; }
+        public decimal Inkomst { get; set; }
 
-        public decimal totalInkomst { get; set; }
+        public decimal TotalInkomst { get; set; }
 
-        public decimal utgift { get; set; }
+        public decimal Utgift { get; set; }
 
-        public decimal totalUtgift { get; set; }
+        public decimal TotalUtgift { get; set; }
 
-        public decimal spara { get; set; }
+        public decimal Spara { get; set; }
 
-        public decimal oanadeutgifter { get; set; }
+        public decimal Oanadeutgifter { get; set; }
 
-        public decimal kvar { get; set; }
+        public decimal Kvar { get; set; }
     }
 }

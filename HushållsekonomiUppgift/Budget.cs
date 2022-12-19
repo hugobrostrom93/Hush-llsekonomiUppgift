@@ -26,27 +26,28 @@ namespace HushållsekonomiUppgift
             var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
-            person.inkomst = (decimal)cmd.ExecuteScalar();
+            
+            person.Inkomst = (decimal)cmd.ExecuteScalar();
 
             // Summera utgifter
             var sql2 = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd2 = new MySqlCommand(sql2, cnn);
             cmd2.ExecuteNonQuery();
-            person.utgift = (decimal)cmd2.ExecuteScalar();
+            person.Utgift = (decimal)cmd2.ExecuteScalar();
 
             cnn.Close();
 
             Console.WriteLine("");
-            Console.WriteLine($"{person.förnamn}s totala inkomster är {person.inkomst}kr");
-            Console.WriteLine($"{person.förnamn}s totala utgifter är {person.utgift}kr");
-            person.oanadeutgifter = (person.inkomst * 25) / 100;
-            Console.WriteLine($"{person.förnamn}s oanade utgifter är {person.oanadeutgifter}kr (alltså 25% av lönen)");
-            person.spara = (person.inkomst * 10) / 100;
-            Console.WriteLine($"Det {person.förnamn} ska spara när hen har fått lönen är {person.spara}kr (alltså 10% av lönen)");
-            var kvar = person.inkomst - person.utgift - person.oanadeutgifter - person.spara;
-            Console.WriteLine($"Det {person.förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.kvar}kr");           //VASADU
+            Console.WriteLine($"{förnamn}s totala inkomster är {person.Inkomst}kr");
+            Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
+            person.Oanadeutgifter = (person.Inkomst * 25) / 100;
+            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
+            person.Spara = (person.Inkomst * 10) / 100;
+            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
+            var kvar = person.Inkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
+            Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
-            return person.totalInkomst;
+            return person.TotalInkomst;
 
         }
     }

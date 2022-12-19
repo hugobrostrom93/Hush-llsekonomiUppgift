@@ -15,6 +15,8 @@ internal class Program
         var connString = databascrud.Read("connString.txt");
         var cnn = new MySqlConnection(connString);
 
+        List<EkonomiPerson> ekonomiPersoner = new List<EkonomiPerson>();
+        //ekonomiPersoner = databascrud.GetPerson();
         //var budget = new Budget();
 
         writelines.välkomsttext();
@@ -37,15 +39,15 @@ internal class Program
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
                     Console.WriteLine("Vilken person vill du söka på?");
-                    ekonomiPerson.förnamn = Console.ReadLine();
-                    Console.WriteLine(ekonomiPerson.totalInkomst);
-                    //ekonomiPerson.inkomst = budget.totalInkomst(ekonomiPerson.förnamn);
+                    ekonomiPerson.Förnamn = Console.ReadLine();
+                    ekonomiPerson.TotalInkomst = budget.SummeraBudget(ekonomiPerson.Förnamn);
+                    Console.WriteLine(ekonomiPerson.TotalInkomst);
                     //Console.WriteLine("");
                     break;
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
                     Console.WriteLine("Vilken person vill du söka på?");
-                    Console.WriteLine(ekonomiPerson.utgift);
+                    Console.WriteLine(ekonomiPerson.Utgift);
                     //ekonomiPerson.förnamn = Console.ReadLine();
                     //ekonomiPerson.utgift = budget.TotalUtgift(ekonomiPerson.förnamn);
                     Console.WriteLine("");
