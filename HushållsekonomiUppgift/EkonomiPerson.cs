@@ -15,33 +15,34 @@ namespace HushållsekonomiUppgift
 
         public string månad { get; set; }
 
-        public int lön { get; set; }
+        public decimal lön { get; set; }
 
-        public int studiemedel { get; set; }
+        public decimal studiemedel { get; set; }
 
-        public int bidrag { get; set; }
+        public decimal bidrag { get; set; }
 
-        public int el { get; set; }
+        public decimal el { get; set; }
 
-        public int hyra { get; set; }
+        public decimal hyra { get; set; }
 
-        public int mat { get; set; }
+        public decimal mat { get; set; }
 
-        public int gym { get; set; }
+        public decimal gym { get; set; }
 
-        public int telefon { get; set; }
+        public decimal telefon { get; set; }
 
-        public int internet { get; set; }
+        public decimal internet { get; set; }
 
-        public int netflix { get; set; }
+        public decimal netflix { get; set; }
 
-        public int spotify { get; set; }       
+        public decimal spotify { get; set; }       
 
         public decimal inkomst { get; set; }
 
         public decimal utgift { get; set; }
 
-        public int spara { get; set; }
-        public int oanadeutgifter { get; set; }
+        public decimal spara { get; set; }
+
+        public decimal oanadeutgifter { get; set; }
     }
 }

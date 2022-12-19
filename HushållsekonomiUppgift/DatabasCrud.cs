@@ -11,38 +11,37 @@ using MySqlConnector;
 
 namespace HushållsekonomiUppgift
 {
-    internal class DatabasCrud : Connection
+    internal class DatabasCrud
     {
-        // Läsa in en secret connection string
-        // Koppla sig till en databas
-        // Koppla ner från databasen
+        public string Read(string filename)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string connString = File.ReadAllText(path + "\\" + filename);
+
+            return connString;
+        }
 
         public void GetTable()
         {
-            // Eventuellt lägga till så den söker igenom om person redan finns i listan
-
-        ////DataTable dt = new DataTable();                
-        ////MySqlDataAdapter adt = new MySqlDataAdapter(); 
-        ////string sql = "";                              
-        ////string connString = "";
-        ////MySqlConnection cnn = null;
+            var connString = Read("connString.txt");
+            var cnn = new MySqlConnection(connString);
+            cnn.Open();
 
             var dt = new DataTable();
+            var sql = "SELECT *"
+            + "FROM EkonomiPerson ";
+            var adt = new MySqlDataAdapter(sql, cnn);
+            cnn.Close();
+            adt.Fill(dt);
 
-            var sql = "SELECT *"                                   //SQL kod som väljer allt.
-            + "FROM EkonomiPerson ";                               //SQL kod, vilken tabell som ska användas, som skickas in (sen)
-            var adt = new MySqlDataAdapter(sql, cnn);              //tar med parameter från sql koden och skickar till databasen. 
-
-                adt.Fill(dt);                                          //hämtar data från databasen som gör så att vi ska kunna se den. 
-            }
-                Console.WriteLine("\n" + dt.Rows.Count);
-                Console.WriteLine();
+            Console.WriteLine("\n" + dt.Rows.Count);
+            Console.WriteLine();
 
 
             if (dt.Columns.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
-                {                    
+                {
                     foreach (DataColumn column in dt.Columns)
                     {
                         Console.Write(row[column] + " ");
@@ -57,15 +56,14 @@ namespace HushållsekonomiUppgift
             cnn.Close();
         }
 
-
-
         public void AddPeopleToDB()
         {
-
-
             // Eventuellt lägga till så den söker igenom om person redan finns i listan
-            using (var cnn = new MySqlConnection(ConnString))
+
             {
+                var connString = Read("connString.txt");
+                var cnn = new MySqlConnection(connString);
+                cnn.Open();
 
                 var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
                 var cmd = new MySqlCommand(sql, cnn);
@@ -120,17 +118,16 @@ namespace HushållsekonomiUppgift
                 Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
                 cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
 
-
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
-
+                cnn.Close();
                 // Skriv ut beräkningar, alltså vad den har kvar att spendera + oanade utgifter (25%) + spara (10%)
 
                 Console.ReadLine();
             }
         }
 
-        
+
 
         // Koden nedan är ifall vi vill ha olika listor för person och ekonomi vilket känns VÄLDIGT ONÖDIGT 
 
