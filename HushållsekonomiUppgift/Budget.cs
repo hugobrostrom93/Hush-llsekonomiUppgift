@@ -26,8 +26,15 @@ namespace HushållsekonomiUppgift
             var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
-            
-            person.Inkomst = (decimal)cmd.ExecuteScalar();
+            if (cmd.ExecuteScalar() != DBNull.Value)
+            {
+             person.TotalInkomst = (decimal)cmd.ExecuteScalar();
+            }
+            else
+            {
+                Console.WriteLine($"Tvär finns inte {förnamn} i  DB" );
+                return person.TotalInkomst;
+            }
 
             // Summera utgifter
             var sql2 = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
@@ -47,8 +54,17 @@ namespace HushållsekonomiUppgift
             var kvar = person.Inkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
             Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
-            return person.TotalInkomst;
-
+            return person.TotalUtgift;
+            if (person.TotalUtgift != null)
+            {
+                person.TotalUtgift = (decimal)cmd.ExecuteScalar();
+            }
+            else
+            {
+                Console.WriteLine($"Tvär finns inte {förnamn} i  DB");
+                return person.TotalUtgift;
+            }
+                
         }
     }
 }

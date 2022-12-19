@@ -44,14 +44,7 @@ internal class Program
                     Console.WriteLine(ekonomiPerson.TotalInkomst);
                     //Console.WriteLine("");
                     break;
-                case ConsoleKey.D4:
-                case ConsoleKey.NumPad4:
-                    Console.WriteLine("Vilken person vill du söka på?");
-                    Console.WriteLine(ekonomiPerson.Utgift);
-                    //ekonomiPerson.förnamn = Console.ReadLine();
-                    //ekonomiPerson.utgift = budget.TotalUtgift(ekonomiPerson.förnamn);
-                    Console.WriteLine("");
-                    break;
+                
             }
         }
 
