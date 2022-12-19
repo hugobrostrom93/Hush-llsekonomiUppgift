@@ -24,7 +24,6 @@ namespace HushållsekonomiUppgift
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string connString = File.ReadAllText(path + "\\" + filename);
-
             return connString;
         }
         public DatabasCrud()
@@ -108,7 +107,6 @@ namespace HushållsekonomiUppgift
 
             var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
             var cmd = new MySqlCommand(sql, cnn);
-
 
             writeline.AddToDbWlName();
             cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
