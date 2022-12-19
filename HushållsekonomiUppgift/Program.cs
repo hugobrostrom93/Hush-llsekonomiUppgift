@@ -38,9 +38,9 @@ internal class Program
                 case ConsoleKey.NumPad3:
                     Console.WriteLine("Vilken person vill du söka på?");
                     ekonomiPerson.förnamn = Console.ReadLine();
+                    ekonomiPerson.totalInkomst = budget.SummeraBudget(ekonomiPerson.förnamn);
                     Console.WriteLine(ekonomiPerson.totalInkomst);
-                    //ekonomiPerson.inkomst = budget.totalInkomst(ekonomiPerson.förnamn);
-                    //Console.WriteLine("");
+                    Console.WriteLine("");
                     break;
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
