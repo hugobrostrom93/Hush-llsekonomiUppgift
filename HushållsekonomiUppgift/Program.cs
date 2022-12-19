@@ -33,13 +33,14 @@ internal class Program
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    databascrud.PrintList(ekonomiPerson.Förnamn);
+                    databascrud.PrintList();
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
                     writelines.sökaNamn();
                     ekonomiPerson.Förnamn = Console.ReadLine();
-                    databascrud.PrintList(ekonomiPerson.Förnamn);
+                    //databascrud.PrintList(ekonomiPerson.Förnamn);
+                    databascrud.PersonSök(ekonomiPerson.Förnamn);
                     ekonomiPerson.TotalInkomst = budget.SummeraBudget(ekonomiPerson.Förnamn);
               
                     break;

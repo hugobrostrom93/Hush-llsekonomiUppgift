@@ -34,14 +34,14 @@ namespace HushållsekonomiUppgift
             cnn.Open();
         }
 
-        public void PrintList(string förnamn)
+        public void PrintList()
         {
             var connString = Read("connString.txt");
             var cnn = new MySqlConnection(connString);
 
             cnn.Open();
             dt = new DataTable();
-            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Mat, Hyra, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}'";
+            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Mat, Hyra, Gym, Telefon, Internet, Spotify FROM EkonomiPerson";
             adt = new MySqlDataAdapter(sql, cnn);
             adt.Fill(dt);
 
@@ -59,10 +59,10 @@ namespace HushållsekonomiUppgift
                 }
                 Console.WriteLine("");
             }
-            else
-            {
-                writeline.FINNSINTE(förnamn);
-            }
+            //else
+            //{
+            //    writeline.FINNSINTE(förnamn);
+            //}
             cnn.Close();
         }
 
