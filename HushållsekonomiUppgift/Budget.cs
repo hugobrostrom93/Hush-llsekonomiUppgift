@@ -11,106 +11,43 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    internal class Budget : Connection
+    internal class Budget
     {
-        MySqlConnection cnn = null;
-        public decimal TotalInkomst(string förnamn)
+        public decimal SummeraBudget(string förnamn)
         {
+            EkonomiPerson person = new EkonomiPerson();
+            DatabasCrud databasCrud = new DatabasCrud();
+
+            var connString = databasCrud.Read("connString.txt");
+            var cnn = new MySqlConnection(connString);
             cnn.Open();
-                var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+
+            // Summera inkomster
+            var sql = $"SELECT SUM(Lön + Studiemedel + Bidrag) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
-            decimal result = (decimal)cmd.ExecuteScalar();
+            person.inkomst = (decimal)cmd.ExecuteScalar();
 
-            Console.WriteLine(result);
-            return result;
+            // Summera utgifter
+            var sql2 = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+            var cmd2 = new MySqlCommand(sql2, cnn);
+            cmd2.ExecuteNonQuery();
+            person.utgift = (decimal)cmd2.ExecuteScalar();
+
             cnn.Close();
+
+            Console.WriteLine("");
+            Console.WriteLine($"{person.förnamn}s totala inkomster är {person.inkomst}kr");
+            Console.WriteLine($"{person.förnamn}s totala utgifter är {person.utgift}kr");
+            person.oanadeutgifter = (person.inkomst * 25) / 100;
+            Console.WriteLine($"{person.förnamn}s oanade utgifter är {person.oanadeutgifter}kr (alltså 25% av lönen)");
+            person.spara = (person.inkomst * 10) / 100;
+            Console.WriteLine($"Det {person.förnamn} ska spara när hen har fått lönen är {person.spara}kr (alltså 10% av lönen)");
+            var kvar = person.inkomst - person.utgift - person.oanadeutgifter - person.spara;
+            Console.WriteLine($"Det {person.förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.kvar}kr");           //VASADU
+            Console.WriteLine("");
+            return person.totalInkomst;
+
         }
-
-        public decimal TotalUtgift(string förnamn)
-        {
-            using (var cnn = new MySqlConnection(ConnString))
-            {
-                var sql = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
-                var cmd = new MySqlCommand(sql, cnn);
-                cmd.ExecuteNonQuery();
-                decimal result = (decimal)cmd.ExecuteScalar();
-
-                Console.WriteLine(result);
-                return result;
-            }
-            }
-        
-        }
-
-        //public int AdderaInkomster()
-        //{
-        //    int sumInkomster = 0;
-        //    foreach (var item in inkomster)
-        //    {
-        //        sumInkomster += item.lön;
-        //        sumInkomster += item.studiemedel;
-        //    }
-        //    return sumInkomster;
-        //}
-
-        //public int AdderaUtgifter()
-        //{
-        //    int sumUtgifter = 0;
-        //    foreach (var item in utgifter)
-        //    {
-        //        sumUtgifter += item.elräkning;
-        //        sumUtgifter += item.hyra;
-        //        sumUtgifter += item.mat;
-        //        sumUtgifter += item.gym;
-        //        sumUtgifter += item.telefon;
-        //        sumUtgifter += item.internet;
-        //        sumUtgifter += item.netflix;
-        //        sumUtgifter += item.spotify;
-        //    }
-        //    return sumUtgifter;
-        //}
-
-
-        //public int Sparat(int pengar)
-        //{
-        //    int sumSpara = 0;
-        //    foreach (var item in kalkyleradeUtgifter)
-        //    {
-        //        sumSpara = (pengar * item.spara) / 100;
-        //    }
-        //    return sumSpara;
-        //}
-
-        //public int OanadeUtgifter(int pengar)
-        //{
-        //    int sumOanade = 0;
-        //    foreach (var item in kalkyleradeUtgifter)
-        //    {
-        //        sumOanade = (pengar * item.oanadeUtgifter) / 100;
-
-        //    }
-        //    return sumOanade;
-        //}
-
-        //public int CashKvar()
-        //{
-        //    int sumCashKvar = 0;
-        //    sumCashKvar = AdderaInkomster() - AdderaUtgifter() - Sparat(AdderaInkomster()) - OanadeUtgifter(AdderaInkomster());
-        //    return sumCashKvar;
-        //}
-
-        //public void RunMethods()
-        //{
-        //    AddLists();
-        //    Console.WriteLine($"Summan av inkomsterna är {AdderaInkomster()}kr\n");
-        //    Console.WriteLine($"Summan av utgifterna är {AdderaUtgifter()}kr\n");
-        //    // Spara 10% av det vi har kvar efter våra utgifter
-        //    Console.WriteLine($"Summan av det du har sparat för månaden är {Sparat(CashKvar())}kr. Alltså 10% av det du har kvar efter alla utgifter\n");
-        //    Console.WriteLine($"Summan av dina oanade utgifter är {OanadeUtgifter(AdderaInkomster())}kr. Alltså 20% av din inkomst\n");
-        //    Console.WriteLine($"Summan av pengarna du har kvar efter att ha betalat alla dina utgifter är {CashKvar()}kr\n");
-        //}
     }
-
-
-
+}
