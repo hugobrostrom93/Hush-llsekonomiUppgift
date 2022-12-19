@@ -23,11 +23,11 @@ namespace HushållsekonomiUppgift
 
         public void switchMeny()
         {
-            Console.WriteLine("Välj ett av dessa alternativ:");
+            Console.WriteLine("\nVälj ett av dessa alternativ:");
             Console.WriteLine
                 ("1: Lägg till en person i listan " +
                 "\n2: Visa tabell " +
-                "\n3:Sök på persons tot inkomster och utgifter:");
+                "\n3:Sök på persons tot inkomster och utgifter:\n");
         }
 
         public void sökaNamn()

@@ -41,12 +41,12 @@ namespace HushållsekonomiUppgift
 
             cnn.Open();
             dt = new DataTable();
-            sql = "SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson;";
+            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}'";
             adt = new MySqlDataAdapter(sql, cnn);
             adt.Fill(dt);
 
             Console.WriteLine("");
-            //Console.Clear();
+
             if (dt.Columns.Count > 0)
             {
                 print.PrintLine();
@@ -87,7 +87,7 @@ namespace HushållsekonomiUppgift
 
                         Console.Clear();
                         print.PrintLine();
-                        print.PrintRow("Förnamn", "Efternamn", "Månad", "Lön", "Studiemedel", "Bidrag", "El", "Mat", "Hyra", "Gym", "Telefon", "Internet", "Spotify");
+                        print.PrintRow("Förnamn", "Efternamn", "Månad", "Lön", "Studiemedel", "Bidrag", "El", "Hyra", "Mat", "Gym", "Telefon", "Internet", "Spotify");
                         print.PrintLine();
                         print.PrintRow(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString(), row[7].ToString(), row[8].ToString(), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString());
                         print.PrintLine();
