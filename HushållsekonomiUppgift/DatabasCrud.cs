@@ -18,11 +18,11 @@ namespace HushållsekonomiUppgift
         // Koppla ner från databasen
 
 
-        DataTable dt = new DataTable();                
-        MySqlDataAdapter adt = new MySqlDataAdapter(); 
-        string sql = "";                              
-        string connString = "";
-        MySqlConnection cnn = null;
+        ////DataTable dt = new DataTable();                
+        ////MySqlDataAdapter adt = new MySqlDataAdapter(); 
+        ////string sql = "";                              
+        ////string connString = "";
+        ////MySqlConnection cnn = null;
 
         public DatabasCrud()
         {
