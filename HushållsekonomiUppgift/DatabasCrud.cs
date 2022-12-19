@@ -40,7 +40,7 @@ namespace HushållsekonomiUppgift
 
             cnn.Open();
             dt = new DataTable();
-            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}'";
+            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Mat, Hyra, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}'";
             adt = new MySqlDataAdapter(sql, cnn);
             adt.Fill(dt);
 
