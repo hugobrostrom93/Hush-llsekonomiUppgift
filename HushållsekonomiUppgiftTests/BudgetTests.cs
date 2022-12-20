@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HushållsekonomiUppgift;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1.X509.SigI;
+using HushållsekonomiUppgift.DTO;
 
 namespace HushållsekonomiUppgift.Tests
 {
@@ -17,7 +17,7 @@ namespace HushållsekonomiUppgift.Tests
         public void SummeraBudgetInkomstTest()
         {
             // Arrange
-            var sut = new Budget();
+            var sut = new Beräkningar();
             var expected = 14625;
             // Act
             var actual = sut.SummeraBudgetInkomst("Hanna");
@@ -28,7 +28,7 @@ namespace HushållsekonomiUppgift.Tests
         public void SummeraBudgetUtgiftTest()
         {
             // Arrange
-            var sut = new Budget();
+            var sut = new Beräkningar();
             var expected = 13409;
             // Act
             var actual = sut.SummeraBudgetUtgift("Hanna");

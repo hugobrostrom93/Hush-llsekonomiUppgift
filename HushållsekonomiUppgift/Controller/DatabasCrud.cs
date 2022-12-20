@@ -6,11 +6,12 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using HushållsekonomiUppgift.Visuals;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using Org.BouncyCastle.Asn1.Crmf;
 
-namespace HushållsekonomiUppgift
+namespace HushållsekonomiUppgift.Logic.Logic
 {
     internal class DatabasCrud
     {
@@ -26,7 +27,6 @@ namespace HushållsekonomiUppgift
             string connString = File.ReadAllText(path + "\\" + filename);
             return connString;
         }
-
         public void PrintList()
         {
             var connString = Read("connString.txt");
@@ -58,7 +58,6 @@ namespace HushållsekonomiUppgift
             //}
             cnn.Close();
         }
-
         public void PersonSök(string förnamn)
         {
             var connString = Read("connString.txt");
@@ -92,7 +91,6 @@ namespace HushållsekonomiUppgift
                 writeline.FINNSINTE(förnamn);
             }
         }
-
         public void AddPeopleToDB()
         {
             var connString = Read("connString.txt");
@@ -116,7 +114,7 @@ namespace HushållsekonomiUppgift
             {
                 if (i < 6) writeline.AddToDbWl(sqlArray[i], "");
                 else writeline.AddToDbWl(sqlArray[i], "kostnad");
-                if (i < 3)cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputString(i));
+                if (i < 3) cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputString(i));
                 else cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputNumber(i));
             }
         }
@@ -133,7 +131,7 @@ namespace HushållsekonomiUppgift
                 }
                 else break;
             }
-                return input;
+            return input;
         }
         public decimal InputNumber(int i)
         {
@@ -142,8 +140,8 @@ namespace HushållsekonomiUppgift
             {
                 if (i >= 3)
                 {
-                    if (decimal.TryParse(Console.ReadLine(), out input) && input >= 0) 
-                    return input; 
+                    if (decimal.TryParse(Console.ReadLine(), out input) && input >= 0)
+                        return input;
                     else Console.WriteLine("Du fååår inte ha bokstäver eller negativa tal\nFörsök igen!");
                 }
                 else break;

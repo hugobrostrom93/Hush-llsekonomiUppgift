@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HushållsekonomiUppgift
+﻿namespace HushållsekonomiUppgift.DTO
 {
     public class EkonomiPerson
     {
@@ -12,6 +6,18 @@ namespace HushållsekonomiUppgift
         public string Förnamn { get; set; }
 
         public string Efternamn { get; set; }
+
+        public decimal TotalInkomst { get; set; }
+
+        public decimal Utgift { get; set; }
+
+        public decimal TotalUtgift { get; set; }
+
+        public decimal Spara { get; set; }
+
+        public decimal Oanadeutgifter { get; set; }
+
+        public decimal Kvar { get; set; }
 
         //public string Månad { get; set; }
 
@@ -38,17 +44,5 @@ namespace HushållsekonomiUppgift
         //public decimal Spotify { get; set; }       
 
         //public decimal Inkomst { get; set; }
-
-        public decimal TotalInkomst { get; set; }
-
-        public decimal Utgift { get; set; }
-
-        public decimal TotalUtgift { get; set; }
-
-        public decimal Spara { get; set; }
-
-        public decimal Oanadeutgifter { get; set; }
-
-        public decimal Kvar { get; set; }
     }
 }

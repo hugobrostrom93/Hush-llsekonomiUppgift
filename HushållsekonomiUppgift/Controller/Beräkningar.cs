@@ -1,17 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HushållsekonomiUppgift.DTO;
+using HushållsekonomiUppgift.Visuals;
 using MySqlConnector;
-using MySqlX.XDevAPI.Relational;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-namespace HushållsekonomiUppgift
+namespace HushållsekonomiUppgift.Logic.Logic
 {
-    public class Budget
+    public class Beräkningar
     {
         public decimal SummeraBudgetInkomst(string förnamn)
         {

@@ -1,11 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HushållsekonomiUppgift.Visuals;
 
-namespace HushållsekonomiUppgift
+namespace HushållsekonomiUppgift.Logic
 {
     public class Logic
     {
@@ -16,7 +11,7 @@ namespace HushållsekonomiUppgift
             Budget budget = new Budget();
             EkonomiPerson ekonomiPerson = new EkonomiPerson();
 
-                writelines.välkomsttext();
+            writelines.välkomsttext();
 
             while (true)
             {
@@ -36,7 +31,6 @@ namespace HushållsekonomiUppgift
                     case ConsoleKey.NumPad3:
                         writelines.sökaNamn();
                         ekonomiPerson.Förnamn = Console.ReadLine();
-                        //databascrud.PrintList(ekonomiPerson.Förnamn);
                         databascrud.PersonSök(ekonomiPerson.Förnamn);
                         ekonomiPerson.TotalInkomst = budget.SummeraBudgetInkomst(ekonomiPerson.Förnamn);
                         ekonomiPerson.Utgift = budget.SummeraBudgetUtgift(ekonomiPerson.Förnamn);
@@ -46,7 +40,7 @@ namespace HushållsekonomiUppgift
                 }
             }
         }
-        
+
         public decimal BeräkningOanade(EkonomiPerson person)
         {
             person.Oanadeutgifter = person.TotalInkomst * (decimal)0.25;

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HushållsekonomiUppgift.DTO;
 
-namespace HushållsekonomiUppgift
+namespace HushållsekonomiUppgift.Visuals
 {
 
     internal class Writelines
     {
-        Budget budget = new Budget();
+        Beräkningar beräkningar = new Beräkningar();
 
 
         public void välkomsttext()
@@ -35,7 +36,7 @@ namespace HushållsekonomiUppgift
         public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {
             Logic logic = new Logic();
-            person.Oanadeutgifter = (decimal)logic.BeräkningOanade(person);
+            person.Oanadeutgifter = logic.BeräkningOanade(person);
             person.Spara = logic.BeräkningSpara(person);
             person.Kvar = logic.BeräkningKvar(person);
             person.TotalUtgift = logic.OanadeOchTotUtgift(person);
@@ -50,9 +51,10 @@ namespace HushållsekonomiUppgift
         }
         public void Kvar(EkonomiPerson person, string förnamn)
         {
-            if (person.Kvar < 0) Console.WriteLine($"Du har överskridit din budget" +
-                $"\nDu har {person.Kvar} i skuld"); 
-            else {
+            if (person.Kvar < 0) Console.WriteLine($"Du har överskridit din beräkningar" +
+                $"\nDu har {person.Kvar} i skuld");
+            else
+            {
                 Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");
             }
         }
