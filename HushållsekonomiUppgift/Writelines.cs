@@ -45,8 +45,16 @@ namespace HushållsekonomiUppgift
             Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av totala inkomsten)");
             Console.WriteLine($"{förnamn}s totala utgifter är {person.TotalUtgift}kr");
             Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
-            Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
+            Kvar(person, förnamn);           //VASADU
             Console.WriteLine("");
+        }
+        public void Kvar(EkonomiPerson person, string förnamn)
+        {
+            if (person.Kvar < 0) Console.WriteLine($"Du har överskridit din budget" +
+                $"\nDu har {person.Kvar} i skuld"); 
+            else {
+                Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");
+            }
         }
         public void FINNSINTE(string förnamn)
         {
