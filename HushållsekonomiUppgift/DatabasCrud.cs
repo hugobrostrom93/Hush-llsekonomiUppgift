@@ -61,7 +61,7 @@ namespace HushållsekonomiUppgift
             }
             //else
             //{
-            //    writeline.FINNSINTE(förnamn);
+            //    writeline.TABELLEN FINNS INTE
             //}
             cnn.Close();
         }

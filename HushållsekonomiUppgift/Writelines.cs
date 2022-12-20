@@ -37,16 +37,35 @@ namespace HushållsekonomiUppgift
 
         public void SummeraUtgifterWR(string förnamn, EkonomiPerson person)
         {
+            person.Oanadeutgifter = SumBeräkningOanade(person);
+            person.Spara = SumBeräkningSpara(person);
+            person.Kvar = SumBeräkningKvar(person);
             Console.WriteLine("");
             Console.WriteLine($"{förnamn}s totala inkomster är {person.TotalInkomst}kr");
             Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
-            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
             Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
-            person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
             Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
-            person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
             Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
+        }
+
+        public decimal SumBeräkningOanade(EkonomiPerson person)
+        {
+            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
+            return person.Oanadeutgifter;
+        }
+        public decimal SumBeräkningSpara(EkonomiPerson person)
+        {
+            if (person.TotalInkomst - person.Spara > person.Utgift + person.Oanadeutgifter)
+                person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
+            else
+                person.Spara = 0;
+            return person.Spara;
+        }
+        public decimal SumBeräkningKvar(EkonomiPerson person)
+        {
+            person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
+            return person.Kvar;
         }
 
         public void FINNSINTE(string förnamn)
