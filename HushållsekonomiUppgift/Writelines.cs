@@ -60,72 +60,9 @@ namespace HushållsekonomiUppgift
         {
             Console.WriteLine($"\nTvär finns inte {förnamn} i  DB\n");
         }
-        public void AddToDbWlName()
+        public void AddToDbWl(string value, string cost)
         {
-            Console.WriteLine("\nAnge ditt förnamn: ");
+            Console.WriteLine($"\nAnge {value} {cost}");
         }
-        public void AddToDbWlLastName()
-        {
-            Console.WriteLine("\nAnge ditt efternamn: ");
-        }
-        public void AddToDbWlPlaneraEkonomi()
-        {
-            Console.WriteLine("\nGrymt! Nu är det dags att planera din ekonomi");
-            Console.WriteLine("Vi börjar med att beräkna dina inkomster!\n");
-        }
-        public void AddToDbWlMånad()
-        {
-            Console.WriteLine("Ange vilken månad du vill planera för: ");
-        }
-        public void AddToDbWlLön()
-        {
-            Console.WriteLine("Ange hur mycket lön du kommer att få in denna månad:");
-        }
-        public void AddToDbWlStudiemedel()
-        {
-            Console.WriteLine("Ange hur mycket studiemedel du kommer att få in denna månad:");
-        }
-        public void AddToDbWlBidrag()
-        {
-            Console.WriteLine("Ange hur mycket bidrag du kommer att få in denna månad:");
-        }
-        public void AddToDbWlBeräknaUtgifter()
-        {
-            Console.WriteLine("Tack. Nu är det dags för att beräkna dina utgifter!");
-        }
-        public void AddToDbWlEl()
-        {
-            Console.WriteLine("Ange hur mycket el du betalar per månad:");
-        }
-        public void AddToDbWlHyra()
-        {
-            Console.WriteLine("Ange hyra du betalar per månad:");
-        }
-        public void AddToDbWlMat()
-        {
-            Console.WriteLine("Ange hur mycket mat du planerar att handla för under denna månad:");
-        }
-        public void AddToDbWlGym()
-        {
-            Console.WriteLine("Ange hur mycket du betalar för gym per månad:");
-        }
-        public void AddToDbWlTel()
-        {
-            Console.WriteLine("Ange hur mycket du betalar för din telefon per månad:");
-        }
-        public void AddToDbWlInternet()
-        {
-            Console.WriteLine("Ange hur mycket du betalar för internet per månad:");
-        }
-        public void AddToDbWlspotify()
-        {
-            Console.WriteLine("Ange hur mycket du betalar för spotify per månad:");
-        }
-        public void AddToDBWlSpara()
-        {
-            Console.WriteLine("Fantastiskt! Nu har vi lagt till all denna infon i vår Databas!");
-            Console.WriteLine("");
-        }
-
     }
 }

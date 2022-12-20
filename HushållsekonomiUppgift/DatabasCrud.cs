@@ -102,61 +102,23 @@ namespace HushållsekonomiUppgift
             var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
             var cmd = new MySqlCommand(sql, cnn);
 
-
-            AddWithValue(cmd, "@Förnamn");
+            AddWithValue(cmd);
 
             cmd.ExecuteNonQuery();
-            writeline.AddToDBWlSpara();
 
             cnn.Close();
         }
-        public void AddWithValue(MySqlCommand cmd, string value)
+        public void AddWithValue(MySqlCommand cmd)
         {
-            //writeline.AddToDbWlName();
-            //cmd.Parameters.AddWithValue("{value}", Console.ReadLine());
-
-            writeline.AddToDbWlName();
-            cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
-
-            writeline.AddToDbWlLastName();
-            cmd.Parameters.AddWithValue("@Efternamn", Console.ReadLine());
-
-            writeline.AddToDbWlPlaneraEkonomi();
-
-            writeline.AddToDbWlMånad();
-            var svar = cmd.Parameters.AddWithValue("@Månad", Console.ReadLine());
-
-            writeline.AddToDbWlLön();
-            cmd.Parameters.AddWithValue("@Lön", Console.ReadLine());
-
-            writeline.AddToDbWlStudiemedel();
-            cmd.Parameters.AddWithValue("@Studiemedel", Console.ReadLine());
-
-            writeline.AddToDbWlBidrag();
-            cmd.Parameters.AddWithValue("@Bidrag", Console.ReadLine());
-
-            writeline.AddToDbWlBeräknaUtgifter();
-
-            writeline.AddToDbWlEl();
-            cmd.Parameters.AddWithValue("@El", Console.ReadLine());
-
-            writeline.AddToDbWlHyra();
-            cmd.Parameters.AddWithValue("@Hyra", Console.ReadLine());
-
-            writeline.AddToDbWlMat();
-            cmd.Parameters.AddWithValue("@Mat", Console.ReadLine());
-
-            writeline.AddToDbWlGym();
-            cmd.Parameters.AddWithValue("@Gym", Console.ReadLine());
-
-            writeline.AddToDbWlTel();
-            cmd.Parameters.AddWithValue("@Telefon", Console.ReadLine());
-
-            writeline.AddToDbWlInternet();
-            cmd.Parameters.AddWithValue("@Internet", Console.ReadLine());
-
-            writeline.AddToDbWlspotify();
-            cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
+            string[] array = new string[] { "Förnamn", "Efternamn", "Månad",
+            "Lön", "Studiemedel", "Bidrag", "El", "Mat", "Hyra", "Gym",
+            "Telefon", "Internet", "Spotify"};
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i < 6) writeline.AddToDbWl(array[i], "");
+                else writeline.AddToDbWl(array[i], "kostnad");
+                cmd.Parameters.AddWithValue($"@{array[i]}", Console.ReadLine());
+            }
         }
     }
 }
