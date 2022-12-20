@@ -10,9 +10,6 @@ namespace HushållsekonomiUppgift.Visuals
 
     internal class Writelines
     {
-        Beräkningar beräkningar = new Beräkningar();
-
-
         public void välkomsttext()
         {
             Console.WriteLine("+---------------------------------------+");
@@ -51,7 +48,7 @@ namespace HushållsekonomiUppgift.Visuals
         }
         public void Kvar(EkonomiPerson person, string förnamn)
         {
-            if (person.Kvar < 0) Console.WriteLine($"Du har överskridit din beräkningar" +
+            if (person.Kvar < 0) Console.WriteLine($"Du har överskridit din budget" +
                 $"\nDu har {person.Kvar} i skuld");
             else
             {

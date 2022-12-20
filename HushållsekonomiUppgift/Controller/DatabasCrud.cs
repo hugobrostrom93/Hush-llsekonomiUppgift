@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Data;
 using HushållsekonomiUppgift.Visuals;
-using Microsoft.Extensions.Configuration;
 using MySqlConnector;
-using Org.BouncyCastle.Asn1.Crmf;
 
-namespace HushållsekonomiUppgift.Logic.Logic
+namespace HushållsekonomiUppgift
 {
     internal class DatabasCrud
     {

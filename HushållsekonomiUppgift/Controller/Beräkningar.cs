@@ -2,7 +2,7 @@
 using HushållsekonomiUppgift.Visuals;
 using MySqlConnector;
 
-namespace HushållsekonomiUppgift.Logic.Logic
+namespace HushållsekonomiUppgift
 {
     public class Beräkningar
     {
