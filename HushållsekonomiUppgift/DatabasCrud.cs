@@ -104,6 +104,18 @@ namespace HushållsekonomiUppgift
             var cmd = new MySqlCommand(sql, cnn);
 
 
+            AddWithValue(cmd, "@Förnamn");
+
+            cmd.ExecuteNonQuery();
+            writeline.AddToDBWlSpara();
+
+            cnn.Close();
+        }
+        public void AddWithValue(MySqlCommand cmd, string value)
+        {
+            //writeline.AddToDbWlName();
+            //cmd.Parameters.AddWithValue("{value}", Console.ReadLine());
+
             writeline.AddToDbWlName();
             cmd.Parameters.AddWithValue("@Förnamn", Console.ReadLine());
 
@@ -146,13 +158,6 @@ namespace HushållsekonomiUppgift
 
             writeline.AddToDbWlspotify();
             cmd.Parameters.AddWithValue("@Spotify", Console.ReadLine());
-
-            cmd.ExecuteNonQuery();
-            writeline.AddToDBWlSpara();
-
-            Console.ReadLine();
-            cnn.Close();
         }
-        
     }
 }
