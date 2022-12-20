@@ -1,6 +1,7 @@
-﻿using HushållsekonomiUppgift.Visuals;
+﻿using HushållsekonomiUppgift.DTO;
+using HushållsekonomiUppgift.Visuals;
 
-namespace HushållsekonomiUppgift.Logic
+namespace HushållsekonomiUppgift
 {
     public class Logic
     {
@@ -8,10 +9,10 @@ namespace HushållsekonomiUppgift.Logic
         {
             Writelines writelines = new Writelines();
             DatabasCrud databascrud = new DatabasCrud();
-            Budget budget = new Budget();
+            Beräkningar budget = new Beräkningar();
             EkonomiPerson ekonomiPerson = new EkonomiPerson();
 
-            writelines.välkomsttext();
+                writelines.välkomsttext();
 
             while (true)
             {
@@ -40,7 +41,7 @@ namespace HushållsekonomiUppgift.Logic
                 }
             }
         }
-
+        
         public decimal BeräkningOanade(EkonomiPerson person)
         {
             person.Oanadeutgifter = person.TotalInkomst * (decimal)0.25;
