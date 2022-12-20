@@ -44,7 +44,7 @@ namespace HushållsekonomiUppgift
             Console.WriteLine($"{förnamn}s totala inkomster är {person.TotalInkomst}kr");
             Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
             Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
-            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
+            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
             Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
         }
