@@ -99,26 +99,56 @@ namespace HushållsekonomiUppgift
             var cnn = new MySqlConnection(connString);
             cnn.Open();
 
-            var sql = "INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
+            var sql = $"INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
             var cmd = new MySqlCommand(sql, cnn);
 
             AddWithValue(cmd);
 
             cmd.ExecuteNonQuery();
-
+            writeline.AddedToDbWl();
             cnn.Close();
         }
         public void AddWithValue(MySqlCommand cmd)
         {
-            string[] array = new string[] { "Förnamn", "Efternamn", "Månad",
-            "Lön", "Studiemedel", "Bidrag", "El", "Mat", "Hyra", "Gym",
-            "Telefon", "Internet", "Spotify"};
-            for (int i = 0; i < array.Length; i++)
+            Arrays array = new Arrays();
+            string[] sqlArray = array.GetArray();
+            for (int i = 0; i < sqlArray.Length; i++)
             {
-                if (i < 6) writeline.AddToDbWl(array[i], "");
-                else writeline.AddToDbWl(array[i], "kostnad");
-                cmd.Parameters.AddWithValue($"@{array[i]}", Console.ReadLine());
+                if (i < 6) writeline.AddToDbWl(sqlArray[i], "");
+                else writeline.AddToDbWl(sqlArray[i], "kostnad");
+                if (i < 3)cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputString(i));
+                else cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputNumber(i));
             }
+        }
+        public string InputString(int i)
+        {
+            string input = "";
+            while (true)
+            {
+                input = Console.ReadLine();
+                if (System.Text.RegularExpressions.Regex.IsMatch(input, @"\d"))
+                {
+                    // input string contains a digit
+                    Console.WriteLine("Du fåååår inte använda siffror\nFörsök igen!");
+                }
+                else break;
+            }
+                return input;
+        }
+        public decimal InputNumber(int i)
+        {
+            decimal input = 0;
+            while (true)
+            {
+                if (i >= 3)
+                {
+                    if (decimal.TryParse(Console.ReadLine(), out input) && input >= 0) 
+                    return input; 
+                    else Console.WriteLine("Du fååår inte ha bokstäver eller negativa tal\nFörsök igen!");
+                }
+                else break;
+            }
+            return input;
         }
     }
 }

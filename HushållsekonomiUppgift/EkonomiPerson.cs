@@ -13,31 +13,31 @@ namespace HushållsekonomiUppgift
 
         public string Efternamn { get; set; }
 
-        public string Månad { get; set; }
+        //public string Månad { get; set; }
 
-        public decimal Lön { get; set; }
+        //public decimal Lön { get; set; }
 
-        public decimal Studiemedel { get; set; }
+        //public decimal Studiemedel { get; set; }
 
-        public decimal Bidrag { get; set; }
+        //public decimal Bidrag { get; set; }
 
-        public decimal El { get; set; }
+        //public decimal El { get; set; }
 
-        public decimal Hyra { get; set; }
+        //public decimal Hyra { get; set; }
 
-        public decimal Mat { get; set; }
+        //public decimal Mat { get; set; }
 
-        public decimal Gym { get; set; }
+        //public decimal Gym { get; set; }
 
-        public decimal Telefon { get; set; }
+        //public decimal Telefon { get; set; }
 
-        public decimal Internet { get; set; }
+        //public decimal Internet { get; set; }
 
-        public decimal Netflix { get; set; }
+        //public decimal Netflix { get; set; }
 
-        public decimal Spotify { get; set; }       
+        //public decimal Spotify { get; set; }       
 
-        public decimal Inkomst { get; set; }
+        //public decimal Inkomst { get; set; }
 
         public decimal TotalInkomst { get; set; }
 

@@ -58,11 +58,15 @@ namespace HushållsekonomiUppgift
         }
         public void FINNSINTE(string förnamn)
         {
-            Console.WriteLine($"\nTvär finns inte {förnamn} i  DB\n");
+            Console.WriteLine($"\nTyvärr finns inte {förnamn} i  DB\n");
         }
         public void AddToDbWl(string value, string cost)
         {
             Console.WriteLine($"\nAnge {value} {cost}");
+        }
+        public void AddedToDbWl()
+        {
+            Console.WriteLine("\nPersonen har lagts till i DB\n");
         }
     }
 }
