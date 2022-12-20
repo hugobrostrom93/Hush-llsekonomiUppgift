@@ -52,5 +52,23 @@ namespace HushållsekonomiUppgift
                 }
             }
         }
+        public decimal SumBeräkningOanade(EkonomiPerson person)
+        {
+            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
+            return person.Oanadeutgifter;
+        }
+        public decimal SumBeräkningSpara(EkonomiPerson person)
+        {
+            if (person.TotalInkomst - person.Spara > person.Utgift + person.Oanadeutgifter)
+                person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
+            else
+                person.Spara = 0;
+            return person.Spara;
+        }
+        public decimal SumBeräkningKvar(EkonomiPerson person)
+        {
+            person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
+            return person.Kvar;
+        }
     }
 }
