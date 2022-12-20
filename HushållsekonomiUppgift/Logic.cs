@@ -16,13 +16,6 @@ namespace HushållsekonomiUppgift
             Budget budget = new Budget();
             EkonomiPerson ekonomiPerson = new EkonomiPerson();
 
-            var connString = databascrud.Read("connString.txt");
-            var cnn = new MySqlConnection(connString);
-
-            List<EkonomiPerson> ekonomiPersoner = new List<EkonomiPerson>();
-            //ekonomiPersoner = databascrud.GetPerson();
-            //var budget = new Budget();
-
             writelines.välkomsttext();
 
             while (true)
@@ -52,6 +45,7 @@ namespace HushållsekonomiUppgift
                 }
             }
         }
+
         public decimal SumBeräkningOanade(EkonomiPerson person)
         {
             person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
