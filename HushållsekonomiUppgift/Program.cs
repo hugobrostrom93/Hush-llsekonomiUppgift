@@ -7,6 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Logic.Run();
+        Logic logic = new Logic();
+        logic.Run();
     }
 }

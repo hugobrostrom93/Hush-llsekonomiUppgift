@@ -27,12 +27,6 @@ namespace HushållsekonomiUppgift
 
             return connString;
         }
-        public DatabasCrud()
-        {
-            var connString = Read("connString.txt");
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
-        }
 
         public void PrintList()
         {
@@ -159,47 +153,6 @@ namespace HushållsekonomiUppgift
             Console.ReadLine();
             cnn.Close();
         }
-        //public List<EkonomiPerson> GetPerson()
-        //{
-        //    var connString = Read("connString.txt");
-        //    var cnn = new MySqlConnection(connString);
-        //    cnn.Open();
-
-        //    var sql = "SELECT * FROM EkonomiPerson";
-        //    var cmd = new MySqlCommand(sql, cnn);
-        //    var reader = cmd.ExecuteReader();
-
-        //    var personer = new List<EkonomiPerson>();
-
-        //    while (reader.Read())
-        //    {
-        //        EkonomiPerson person = new EkonomiPerson
-        //        {
-        //            Förnamn = reader.GetString("Förnamn"),
-        //            Efternamn = reader.GetString("Efternamn"),
-        //            Månad = reader.GetString("Månad"),
-        //            Lön = reader.GetDecimal("Lön"),
-        //            Studiemedel = reader.GetDecimal("Studiemedel"),
-        //            Bidrag = reader.GetDecimal("Bidrag"),
-        //            El = reader.GetDecimal("El"),
-        //            Hyra = reader.GetDecimal("Hyra"),
-        //            Mat = reader.GetDecimal("Mat"),
-        //            Gym = reader.GetDecimal("Gym"),
-        //            Telefon = reader.GetDecimal("Telefon"),
-        //            Internet = reader.GetDecimal("Internet"),
-        //            Spotify = reader.GetDecimal("Spotify"),
-        //            //Inkomst = reader.GetDecimal("Inkomst"),
-        //            //TotalInkomst = reader.GetDecimal("TotalInkomst"),
-        //            //Utgift = reader.GetDecimal("Utgift"),
-        //            //TotalUtgift = reader.GetDecimal("TotalUtgift"),
-        //            //Spara = reader.GetDecimal("Spara"),
-        //            //Oanadeutgifter = reader.GetDecimal("Oanadeutgifter"),
-        //            //Kvar = reader.GetDecimal("Kvar"),
-        //        };
-        //        personer.Add(person);
-        //    }
-        //    cnn.Close();
-        //    return personer;
-        //}
+        
     }
 }

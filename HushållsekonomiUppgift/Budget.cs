@@ -43,7 +43,7 @@ namespace HushållsekonomiUppgift
             cmd2.ExecuteNonQuery();
             person.Utgift = (decimal)cmd2.ExecuteScalar();
 
-            writeline.SummeraUtgifterWR(förnamn, person);
+            writeline.SummeraUtgifterWl(förnamn, person);
 
             if (person.TotalUtgift != null)
             {
