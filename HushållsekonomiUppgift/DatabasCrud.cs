@@ -24,7 +24,6 @@ namespace HushållsekonomiUppgift
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string connString = File.ReadAllText(path + "\\" + filename);
-
             return connString;
         }
 
