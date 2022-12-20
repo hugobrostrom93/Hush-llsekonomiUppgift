@@ -35,7 +35,7 @@ namespace HushållsekonomiUppgift
             Console.WriteLine("\nVilken person vill du söka på?");
         }
 
-        public void SummeraUtgifterWR(string förnamn, EkonomiPerson person)
+        public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {
             Logic logic = new Logic();
             person.Oanadeutgifter = logic.SumBeräkningOanade(person);
