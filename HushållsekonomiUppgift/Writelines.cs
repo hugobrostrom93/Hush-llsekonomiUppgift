@@ -20,7 +20,6 @@ namespace HushållsekonomiUppgift
             Console.WriteLine("");
 
         }
-
         public void switchMeny()
         {
             Console.WriteLine("\nVälj ett av dessa alternativ:");
@@ -29,12 +28,10 @@ namespace HushållsekonomiUppgift
                 "\n2: Visa tabell " +
                 "\n3: Sök på persons tot inkomster och utgifter:\n");
         }
-
         public void sökaNamn()
         {
             Console.WriteLine("\nVilken person vill du söka på?");
         }
-
         public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {
             Logic logic = new Logic();
@@ -51,17 +48,14 @@ namespace HushållsekonomiUppgift
             Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
         }
-
         public void FINNSINTE(string förnamn)
         {
             Console.WriteLine($"\nTvär finns inte {förnamn} i  DB\n");
         }
-
         public void AddToDbWlName()
         {
             Console.WriteLine("\nAnge ditt förnamn: ");
         }
-
         public void AddToDbWlLastName()
         {
             Console.WriteLine("\nAnge ditt efternamn: ");
