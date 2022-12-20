@@ -46,10 +46,10 @@ namespace HushållsekonomiUppgift
                 }
             }
         }
-
+        
         public decimal BeräkningOanade(EkonomiPerson person)
         {
-            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
+            person.Oanadeutgifter = person.TotalInkomst * (decimal)0.25;
             if (person.Oanadeutgifter <= 0) person.Oanadeutgifter = 0;
             return person.Oanadeutgifter;
         }
@@ -61,8 +61,8 @@ namespace HushållsekonomiUppgift
         }
         public decimal BeräkningSpara(EkonomiPerson person)
         {
-            if (person.TotalInkomst - person.Spara > person.TotalUtgift)
-                person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
+            if (person.TotalInkomst - person.Spara > person.Utgift)
+                person.Spara = (person.TotalInkomst - person.Utgift) * (decimal)0.10;
             else
                 person.Spara = 0;
             return person.Spara;

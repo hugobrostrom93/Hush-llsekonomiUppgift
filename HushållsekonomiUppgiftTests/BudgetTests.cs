@@ -85,6 +85,63 @@ namespace HushållsekonomiUppgift.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void BeräkningSparaTestPositive()
+        {
+            person.TotalInkomst = 1000;
+            person.Utgift = 0;
+            // Arrange
+            var sut = new Logic();
+            var expected = (decimal)100;
+            // Act
+            decimal actual = sut.BeräkningSpara(person);
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void BeräkningSparaTestNegative()
+        {
+            person.TotalInkomst = 16500;
+            person.Utgift = 18700;
+            person.Spara = person.TotalInkomst * (decimal)0.10;
+            // Arrange
+            var sut = new Logic();
+            var expected = (decimal)0;
+            // Act
+            decimal actual = sut.BeräkningSpara(person);
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void BeräkningKvarTestPositive()
+        {
+            person.TotalInkomst = 16000;
+            person.Utgift = 8000;
+            person.Oanadeutgifter = 3000;
+            person.Spara = 0;
+            // Arrange
+            var sut = new Logic();
+            var expected = (decimal)5000;
+            // Act
+            decimal actual = sut.BeräkningKvar(person);
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void BeräkningKvarTestNegative()
+        {
+            person.TotalInkomst = 10000;
+            person.Utgift = 8000;
+            person.Oanadeutgifter = 3000;
+            person.Spara = 0;
+            // Arrange
+            var sut = new Logic();
+            var expected = (decimal)-1000;
+            // Act
+            decimal actual = sut.BeräkningKvar(person);
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
 
         //[TestMethod]
         //public void AdderaInkomsterTest2()
