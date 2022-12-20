@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    internal class Logic
+    public class Logic
     {
         public void Run()
         {
@@ -16,7 +16,7 @@ namespace HushållsekonomiUppgift
             Budget budget = new Budget();
             EkonomiPerson ekonomiPerson = new EkonomiPerson();
 
-            writelines.välkomsttext();
+                writelines.välkomsttext();
 
             while (true)
             {
@@ -38,28 +38,36 @@ namespace HushållsekonomiUppgift
                         ekonomiPerson.Förnamn = Console.ReadLine();
                         //databascrud.PrintList(ekonomiPerson.Förnamn);
                         databascrud.PersonSök(ekonomiPerson.Förnamn);
-                        ekonomiPerson.TotalInkomst = budget.SummeraBudget(ekonomiPerson.Förnamn);
-
+                        ekonomiPerson.TotalInkomst = budget.SummeraBudgetInkomst(ekonomiPerson.Förnamn);
+                        ekonomiPerson.Utgift = budget.SummeraBudgetUtgift(ekonomiPerson.Förnamn);
+                        writelines.SummeraUtgifterWl(ekonomiPerson.Förnamn, ekonomiPerson);
                         break;
 
                 }
             }
         }
 
-        public decimal SumBeräkningOanade(EkonomiPerson person)
+        public decimal BeräkningOanade(EkonomiPerson person)
         {
             person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
+            if (person.Oanadeutgifter <= 0) person.Oanadeutgifter = 0;
             return person.Oanadeutgifter;
         }
-        public decimal SumBeräkningSpara(EkonomiPerson person)
+        public decimal OanadeOchTotUtgift(EkonomiPerson person)
         {
-            if (person.TotalInkomst - person.Spara > person.Utgift + person.Oanadeutgifter)
+            person.TotalUtgift = person.Oanadeutgifter + person.Utgift;
+            if (person.TotalUtgift <= 0) person.TotalUtgift = 0;
+            return person.TotalUtgift;
+        }
+        public decimal BeräkningSpara(EkonomiPerson person)
+        {
+            if (person.TotalInkomst - person.Spara > person.TotalUtgift)
                 person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
             else
                 person.Spara = 0;
             return person.Spara;
         }
-        public decimal SumBeräkningKvar(EkonomiPerson person)
+        public decimal BeräkningKvar(EkonomiPerson person)
         {
             person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
             return person.Kvar;

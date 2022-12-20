@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    internal class Budget
+    public class Budget
     {
-        public decimal SummeraBudget(string förnamn)
+        public decimal SummeraBudgetInkomst(string förnamn)
         {
             Writelines writeline = new Writelines();
             EkonomiPerson person = new EkonomiPerson();
@@ -34,16 +34,26 @@ namespace HushållsekonomiUppgift
             else
             {
                 writeline.FINNSINTE(förnamn);
-                return person.TotalInkomst;
             }
+            cnn.Close();
+            return person.TotalInkomst;
+
+        }
+        public decimal SummeraBudgetUtgift(string förnamn)
+        {
+            Writelines writeline = new Writelines();
+            EkonomiPerson person = new EkonomiPerson();
+            DatabasCrud databasCrud = new DatabasCrud();
+
+            var connString = databasCrud.Read("connString.txt");
+            var cnn = new MySqlConnection(connString);
+            cnn.Open();
 
             // Summera utgifter
-            var sql2 = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
-            var cmd2 = new MySqlCommand(sql2, cnn);
-            cmd2.ExecuteNonQuery();
-            person.Utgift = (decimal)cmd2.ExecuteScalar();
-
-            writeline.SummeraUtgifterWl(förnamn, person);
+            var sql = $"SELECT SUM(El + Mat + Hyra + Gym + Telefon + Internet + Spotify) FROM `EkonomiPerson` WHERE Förnamn = '{förnamn}';";
+            var cmd = new MySqlCommand(sql, cnn);
+            cmd.ExecuteNonQuery();
+            person.Utgift = (decimal)cmd.ExecuteScalar();
 
             if (person.TotalUtgift != null)
             {
