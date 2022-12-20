@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HushållsekonomiUppgift
 {
-    internal class EkonomiPerson
+    public class EkonomiPerson
     {
         // Används inte i koden än men tänker att vi lär behöva det senare
         public string Förnamn { get; set; }

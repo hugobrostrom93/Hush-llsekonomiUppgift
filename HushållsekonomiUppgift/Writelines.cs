@@ -35,16 +35,19 @@ namespace HushållsekonomiUppgift
             Console.WriteLine("\nVilken person vill du söka på?");
         }
 
-        public void SummeraUtgifterWR(string förnamn, EkonomiPerson person)
+        public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {
+            Logic logic = new Logic();
+            person.Oanadeutgifter = (decimal)logic.BeräkningOanade(person);
+            person.Spara = logic.BeräkningSpara(person);
+            person.Kvar = logic.BeräkningKvar(person);
+            person.TotalUtgift = logic.OanadeOchTotUtgift(person);
             Console.WriteLine("");
             Console.WriteLine($"{förnamn}s totala inkomster är {person.TotalInkomst}kr");
-            Console.WriteLine($"{förnamn}s totala utgifter är {person.Utgift}kr");
-            person.Oanadeutgifter = (person.TotalInkomst * 25) / 100;
-            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av lönen)");
-            person.Spara = (person.TotalInkomst - person.Utgift) * 10 / 100;
-            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr (alltså 10% av lönen)");
-            person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;
+            Console.WriteLine($"{förnamn}s fasta utgifter är {person.Utgift}kr");
+            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av totala inkomsten)");
+            Console.WriteLine($"{förnamn}s totala utgifter är {person.TotalUtgift}kr");
+            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
             Console.WriteLine($"Det {förnamn} har kvar att spendera efter alla hens utgifter + sparande är {person.Kvar}kr");           //VASADU
             Console.WriteLine("");
         }
