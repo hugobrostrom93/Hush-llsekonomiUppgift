@@ -21,17 +21,13 @@ namespace HushållsekonomiUppgift
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
             if (cmd.ExecuteScalar() != DBNull.Value)
-            {
                 person.TotalInkomst = (decimal)cmd.ExecuteScalar();
-            }
             else
-            {
                 writeline.FINNSINTE(förnamn);
-            }
             cnn.Close();
             return person.TotalInkomst;
-
         }
+
         public decimal SummeraBudgetUtgift(string förnamn)
         {
             Writelines writeline = new Writelines();
@@ -47,19 +43,14 @@ namespace HushållsekonomiUppgift
             var cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
             person.Utgift = (decimal)cmd.ExecuteScalar();
-
             if (person.TotalUtgift != null)
-            {
                 person.TotalUtgift = (decimal)cmd.ExecuteScalar();
-            }
             else
-            {
                 writeline.FINNSINTE(förnamn);
                 return person.TotalUtgift;
-            }
+
             cnn.Close();
             return person.TotalUtgift;
-
         }
     }
 }

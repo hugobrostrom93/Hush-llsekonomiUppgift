@@ -1,15 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HushållsekonomiUppgift.Visuals
+﻿namespace HushållsekonomiUppgift.Visuals
 {
     internal class PrintMetod
     {
         public int tableWidth = 190;
+
         public void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));

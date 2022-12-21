@@ -24,10 +24,12 @@ namespace HushållsekonomiUppgift
                         databascrud.AddPeopleToDB();
                         Console.WriteLine("");
                         break;
+
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         databascrud.PrintList();
                         break;
+
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
                         writelines.sökaNamn();
@@ -38,31 +40,32 @@ namespace HushållsekonomiUppgift
                         ekonomiPerson.Utgift = budget.SummeraBudgetUtgift(ekonomiPerson.Förnamn);
                         writelines.SummeraUtgifterWl(ekonomiPerson.Förnamn, ekonomiPerson);
                         break;
-
                 }
             }
         }
 
         public decimal BeräkningOanade(EkonomiPerson person)
         {
-            person.Oanadeutgifter = person.TotalInkomst * (decimal)0.25;
-            if (person.Oanadeutgifter <= 0) person.Oanadeutgifter = 0;
+            person.Oanadeutgifter = person.TotalInkomst * 0.25m;
+            if (person.Oanadeutgifter < 0) person.Oanadeutgifter = 0;
             return person.Oanadeutgifter;
         }
+
         public decimal OanadeOchTotUtgift(EkonomiPerson person)
         {
             person.TotalUtgift = person.Oanadeutgifter + person.Utgift;
             if (person.TotalUtgift <= 0) person.TotalUtgift = 0;
             return person.TotalUtgift;
         }
+
         public decimal BeräkningSpara(EkonomiPerson person)
         {
-            if (person.TotalInkomst - person.Spara > person.Utgift)
-                person.Spara = (person.TotalInkomst - person.Utgift) * (decimal)0.10;
-            else
+            person.Spara = (person.TotalInkomst - person.TotalUtgift) * 0.10m;
+            if (person.TotalInkomst - person.Spara < person.TotalUtgift)
                 person.Spara = 0;
             return person.Spara;
         }
+
         public decimal BeräkningKvar(EkonomiPerson person)
         {
             person.Kvar = person.TotalInkomst - person.Utgift - person.Oanadeutgifter - person.Spara;

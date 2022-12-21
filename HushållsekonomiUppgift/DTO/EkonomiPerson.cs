@@ -42,7 +42,7 @@
 
         //public decimal Netflix { get; set; }
 
-        //public decimal Spotify { get; set; }       
+        //public decimal Spotify { get; set; }
 
         //public decimal Inkomst { get; set; }
     }
