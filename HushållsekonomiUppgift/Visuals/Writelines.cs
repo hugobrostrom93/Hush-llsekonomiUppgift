@@ -28,7 +28,7 @@ namespace HushållsekonomiUppgift.Visuals
         }
         public void sökaNamn()
         {
-            Console.WriteLine("\nVill du söka på förnamn eller efternamn?");
+            Console.WriteLine("\nVilken person vill du söka på?");
         }
         public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {
@@ -37,13 +37,12 @@ namespace HushållsekonomiUppgift.Visuals
             person.Spara = logic.BeräkningSpara(person);
             person.Kvar = logic.BeräkningKvar(person);
             person.TotalUtgift = logic.OanadeOchTotUtgift(person);
-            Console.WriteLine("");
-            Console.WriteLine($"{förnamn}s totala inkomster är {person.TotalInkomst}kr");
-            Console.WriteLine($"{förnamn}s fasta utgifter är {person.Utgift}kr");
-            Console.WriteLine($"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av totala inkomsten)");
-            Console.WriteLine($"{förnamn}s totala utgifter är {person.TotalUtgift}kr");
-            Console.WriteLine($"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
-            Kvar(person, förnamn);           //VASADU
+            Console.WriteLine($"\n{förnamn}s totala inkomster är {person.TotalInkomst}kr\n"+
+            $"{förnamn}s fasta utgifter är {person.Utgift}kr\n"+
+            $"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av totala inkomsten)\n"+
+            $"{förnamn}s totala utgifter är {person.TotalUtgift}kr\n"+
+            $"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
+            Kvar(person, förnamn);
             Console.WriteLine("");
         }
         public void Kvar(EkonomiPerson person, string förnamn)

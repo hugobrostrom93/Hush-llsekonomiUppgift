@@ -31,9 +31,8 @@ namespace HushållsekonomiUppgift
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
                         writelines.sökaNamn();
-                        //ekonomiPerson.Förnamn = Console.ReadLine();
-                        var valNamn = Console.ReadLine();
-                        databascrud.XYZ();
+                        ekonomiPerson.Förnamn = Console.ReadLine();
+                        //databascrud.XYZ();
                         databascrud.PersonSök(ekonomiPerson.Förnamn);
                         ekonomiPerson.TotalInkomst = budget.SummeraBudgetInkomst(ekonomiPerson.Förnamn);
                         ekonomiPerson.Utgift = budget.SummeraBudgetUtgift(ekonomiPerson.Förnamn);

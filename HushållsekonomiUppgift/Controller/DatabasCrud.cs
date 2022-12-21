@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using HushållsekonomiUppgift.DTO;
 using HushållsekonomiUppgift.Visuals;
 using MySqlConnector;
 
@@ -70,7 +71,7 @@ namespace HushållsekonomiUppgift
         //        }
         //    }
         //}
-            public void PersonSök(string namn)
+            public void PersonSök(string förnamn)
             {
                 var connString = Read("connString.txt");
                 var cnn = new MySqlConnection(connString);
@@ -84,26 +85,17 @@ namespace HushållsekonomiUppgift
 
             if (dt.Columns.Count == 1)
             {
-                foreach (DataRow row in dt.Rows)
-                {
-                    foreach (DataColumn column in dt.Columns)
-                    {
-                        Console.Write(row[column] + " ");
-
-                        Console.Clear();
-                        print.PrintLine();
-                        print.PrintRow("Förnamn", "Efternamn", "Månad", "Lön", "Studiemedel", "Bidrag", "El", "Hyra", "Mat", "Gym", "Telefon", "Internet", "Spotify");
-                        print.PrintLine();
-                        print.PrintRow(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString(), row[7].ToString(), row[8].ToString(), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString());
-                        print.PrintLine();
-                    }
-                }
+                SqlForeach();
             }
             else if (dt.Columns.Count > 1) 
             {
-                sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{efternamn}';";
+                Console.WriteLine("Det finns flera personer med detta förnamnet," +
+                    "Var god ange efternamn istället. :)");
+                var efternamn = Console.ReadLine();
+                sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Efternamn = '{efternamn}';";
                 adt = new MySqlDataAdapter(sql, cnn);
                 adt.Fill(dt);
+                SqlForeach();
             }
 
             else
@@ -111,6 +103,24 @@ namespace HushållsekonomiUppgift
                 writeline.FINNSINTE(förnamn);
             }
             }
+
+            public void SqlForeach()
+            {
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataColumn column in dt.Columns)
+                {
+                    Console.Write(row[column] + " ");
+
+                    Console.Clear();
+                    print.PrintLine();
+                    print.PrintRow("Förnamn", "Efternamn", "Månad", "Lön", "Studiemedel", "Bidrag", "El", "Hyra", "Mat", "Gym", "Telefon", "Internet", "Spotify");
+                    print.PrintLine();
+                    print.PrintRow(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString(), row[7].ToString(), row[8].ToString(), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString());
+                    print.PrintLine();
+                }
+            }
+        }
             public void AddPeopleToDB()
             {
                 var connString = Read("connString.txt");
