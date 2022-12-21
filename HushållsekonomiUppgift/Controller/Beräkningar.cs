@@ -23,7 +23,7 @@ namespace HushållsekonomiUppgift
             if (cmd.ExecuteScalar() != DBNull.Value)
                 person.TotalInkomst = (decimal)cmd.ExecuteScalar();
             else
-                writeline.FINNSINTE(förnamn);
+                writeline.NamnFinnsInte(förnamn);
             cnn.Close();
             return person.TotalInkomst;
         }
@@ -46,7 +46,7 @@ namespace HushållsekonomiUppgift
             if (person.TotalUtgift != null)
                 person.TotalUtgift = (decimal)cmd.ExecuteScalar();
             else
-                writeline.FINNSINTE(förnamn);
+                writeline.NamnFinnsInte(förnamn);
                 return person.TotalUtgift;
 
             cnn.Close();

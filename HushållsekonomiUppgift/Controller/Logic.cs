@@ -60,7 +60,9 @@ namespace HushållsekonomiUppgift
 
         public decimal BeräkningSpara(EkonomiPerson person)
         {
-            person.Spara = (person.TotalInkomst - person.TotalUtgift) * 0.10m;
+            // person.Spara = person.Krav * 0.10m hade gått om inte
+            // metoderna använder varandra isåfall
+            person.Spara = (person.TotalInkomst - person.TotalUtgift) * 0.10m; 
             if (person.TotalInkomst - person.Spara < person.TotalUtgift)
                 person.Spara = 0;
             return person.Spara;

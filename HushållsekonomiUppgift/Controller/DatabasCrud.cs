@@ -99,7 +99,7 @@ namespace HushållsekonomiUppgift
             }
             else
             {
-                writeline.FINNSINTE(förnamn);
+                writeline.NamnFinnsInte(förnamn);
             }
         }
 

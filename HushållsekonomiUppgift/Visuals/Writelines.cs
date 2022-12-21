@@ -37,7 +37,7 @@ namespace HushållsekonomiUppgift.Visuals
             $"{förnamn}s fasta utgifter är {person.Utgift}kr\n" +
             $"{förnamn}s oanade utgifter är {person.Oanadeutgifter}kr (alltså 25% av totala inkomsten)\n" +
             $"{förnamn}s totala utgifter är {person.TotalUtgift}kr\n" +
-            $"Det {förnamn} ska spara när hen har fått lönen är {person.Spara}kr");
+            $"Det {förnamn} ska spara när hen har fått lönen är {Math.Round(person.Spara)}kr");
             Kvar(person, förnamn);
             Console.WriteLine("");
         }
@@ -49,11 +49,11 @@ namespace HushållsekonomiUppgift.Visuals
             else
             {
                 Console.WriteLine($"Det {förnamn} har kvar att " +
-                    $"spendera efter alla hens utgifter + sparande är {person.Kvar}kr");
+                    $"spendera efter alla hens utgifter + sparande är {Math.Round(person.Kvar)}kr");
             }
         }
 
-        public void FINNSINTE(string förnamn)
+        public void NamnFinnsInte(string förnamn)
         {
             Console.WriteLine($"\nTyvärr finns inte {förnamn} i  DB\n");
         }
