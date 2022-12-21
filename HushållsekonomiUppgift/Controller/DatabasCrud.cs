@@ -83,11 +83,11 @@ namespace HushållsekonomiUppgift
                 adt = new MySqlDataAdapter(sql, cnn);
                 adt.Fill(dt);
 
-            if (dt.Columns.Count == 1)
+            if (dt.Rows.Count == 1)
             {
                 SqlForeach();
             }
-            else if (dt.Columns.Count > 1) 
+            else if (dt.Rows.Count > 1) 
             {
                 Console.WriteLine("Det finns flera personer med detta förnamnet," +
                     "Var god ange efternamn istället. :)");
@@ -114,7 +114,9 @@ namespace HushållsekonomiUppgift
 
                     Console.Clear();
                     print.PrintLine();
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     print.PrintRow("Förnamn", "Efternamn", "Månad", "Lön", "Studiemedel", "Bidrag", "El", "Hyra", "Mat", "Gym", "Telefon", "Internet", "Spotify");
+                    Console.ForegroundColor = ConsoleColor.White;
                     print.PrintLine();
                     print.PrintRow(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString(), row[6].ToString(), row[7].ToString(), row[8].ToString(), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString());
                     print.PrintLine();
