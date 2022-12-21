@@ -2,7 +2,6 @@
 {
     public class EkonomiPerson
     {
-        // Används inte i koden än men tänker att vi lär behöva det senare
         public string Förnamn { get; set; }
 
         public string Efternamn { get; set; }
@@ -18,6 +17,8 @@
         public decimal Oanadeutgifter { get; set; }
 
         public decimal Kvar { get; set; }
+
+        // Används inte i koden än men tänker att vi lär behöva det senare
 
         //public string Månad { get; set; }
 

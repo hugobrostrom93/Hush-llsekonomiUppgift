@@ -28,7 +28,7 @@ namespace HushållsekonomiUppgift.Visuals
         }
         public void sökaNamn()
         {
-            Console.WriteLine("\nVilken person vill du söka på?");
+            Console.WriteLine("\nVill du söka på förnamn eller efternamn?");
         }
         public void SummeraUtgifterWl(string förnamn, EkonomiPerson person)
         {

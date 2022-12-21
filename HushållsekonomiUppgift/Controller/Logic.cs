@@ -12,7 +12,7 @@ namespace HushållsekonomiUppgift
             Beräkningar budget = new Beräkningar();
             EkonomiPerson ekonomiPerson = new EkonomiPerson();
 
-                writelines.välkomsttext();
+            writelines.välkomsttext();
 
             while (true)
             {
@@ -31,7 +31,9 @@ namespace HushållsekonomiUppgift
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
                         writelines.sökaNamn();
-                        ekonomiPerson.Förnamn = Console.ReadLine();
+                        //ekonomiPerson.Förnamn = Console.ReadLine();
+                        var valNamn = Console.ReadLine();
+                        databascrud.XYZ();
                         databascrud.PersonSök(ekonomiPerson.Förnamn);
                         ekonomiPerson.TotalInkomst = budget.SummeraBudgetInkomst(ekonomiPerson.Förnamn);
                         ekonomiPerson.Utgift = budget.SummeraBudgetUtgift(ekonomiPerson.Förnamn);
@@ -41,7 +43,7 @@ namespace HushållsekonomiUppgift
                 }
             }
         }
-        
+
         public decimal BeräkningOanade(EkonomiPerson person)
         {
             person.Oanadeutgifter = person.TotalInkomst * (decimal)0.25;

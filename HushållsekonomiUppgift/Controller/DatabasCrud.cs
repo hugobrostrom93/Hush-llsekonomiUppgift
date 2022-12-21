@@ -49,18 +49,40 @@ namespace HushållsekonomiUppgift
             //}
             cnn.Close();
         }
-        public void PersonSök(string förnamn)
-        {
-            var connString = Read("connString.txt");
-            var cnn = new MySqlConnection(connString);
 
-            cnn.Open();
-            dt = new DataTable();
-            sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}';";
-            adt = new MySqlDataAdapter(sql, cnn);
-            adt.Fill(dt);
+        //public void XYZ()
+        //{
+        //    while (true)
+        //    {
+        //        switch (Console.ReadKey().Key)
+        //        {
+        //            case ConsoleKey.D1:
+        //            case ConsoleKey.NumPad1:
+        //                var förnamn = Console.ReadLine();
+        //                PersonSök(förnamn);
 
-            if (dt.Columns.Count > 0)
+        //                break;
+        //            case ConsoleKey.D2:
+        //            case ConsoleKey.NumPad2:
+        //                var efternamn = Console.ReadLine();
+        //                PersonSök(efternamn);
+        //                break;
+        //        }
+        //    }
+        //}
+            public void PersonSök(string namn)
+            {
+                var connString = Read("connString.txt");
+                var cnn = new MySqlConnection(connString);
+
+                cnn.Open();
+   
+                dt = new DataTable();
+                sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{förnamn}';";
+                adt = new MySqlDataAdapter(sql, cnn);
+                adt.Fill(dt);
+
+            if (dt.Columns.Count == 1)
             {
                 foreach (DataRow row in dt.Rows)
                 {
@@ -77,67 +99,74 @@ namespace HushållsekonomiUppgift
                     }
                 }
             }
+            else if (dt.Columns.Count > 1) 
+            {
+                sql = $"SELECT Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify FROM EkonomiPerson WHERE Förnamn = '{efternamn}';";
+                adt = new MySqlDataAdapter(sql, cnn);
+                adt.Fill(dt);
+            }
+
             else
             {
                 writeline.FINNSINTE(förnamn);
             }
-        }
-        public void AddPeopleToDB()
-        {
-            var connString = Read("connString.txt");
-            var cnn = new MySqlConnection(connString);
-            cnn.Open();
-
-            var sql = $"INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
-            var cmd = new MySqlCommand(sql, cnn);
-
-            AddWithValue(cmd);
-
-            cmd.ExecuteNonQuery();
-            writeline.AddedToDbWl();
-            cnn.Close();
-        }
-        public void AddWithValue(MySqlCommand cmd)
-        {
-            Arrays array = new Arrays();
-            string[] sqlArray = array.GetArray();
-            for (int i = 0; i < sqlArray.Length; i++)
-            {
-                if (i < 6) writeline.AddToDbWl(sqlArray[i], "");
-                else writeline.AddToDbWl(sqlArray[i], "kostnad");
-                if (i < 3) cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputString(i));
-                else cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputNumber(i));
             }
-        }
-        public string InputString(int i)
-        {
-            string input = "";
-            while (true)
+            public void AddPeopleToDB()
             {
-                input = Console.ReadLine();
-                if (System.Text.RegularExpressions.Regex.IsMatch(input, @"\d"))
+                var connString = Read("connString.txt");
+                var cnn = new MySqlConnection(connString);
+                cnn.Open();
+
+                var sql = $"INSERT INTO EkonomiPerson (Förnamn, Efternamn, Månad, Lön, Studiemedel, Bidrag, El, Hyra, Mat, Gym, Telefon, Internet, Spotify) VALUES (@Förnamn, @Efternamn, @Månad, @Lön, @Studiemedel, @Bidrag, @El, @Hyra, @Mat, @Gym, @Telefon, @Internet, @Spotify)";
+                var cmd = new MySqlCommand(sql, cnn);
+
+                AddWithValue(cmd);
+
+                cmd.ExecuteNonQuery();
+                writeline.AddedToDbWl();
+                cnn.Close();
+            }
+            public void AddWithValue(MySqlCommand cmd)
+            {
+                Arrays array = new Arrays();
+                string[] sqlArray = array.GetArray();
+                for (int i = 0; i < sqlArray.Length; i++)
                 {
-                    // input string contains a digit
-                    Console.WriteLine("Du fåååår inte använda siffror\nFörsök igen!");
+                    if (i < 6) writeline.AddToDbWl(sqlArray[i], "");
+                    else writeline.AddToDbWl(sqlArray[i], "kostnad");
+                    if (i < 3) cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputString(i));
+                    else cmd.Parameters.AddWithValue($"@{sqlArray[i]}", InputNumber(i));
                 }
-                else break;
             }
-            return input;
-        }
-        public decimal InputNumber(int i)
-        {
-            decimal input = 0;
-            while (true)
+            public string InputString(int i)
             {
-                if (i >= 3)
+                string input = "";
+                while (true)
                 {
-                    if (decimal.TryParse(Console.ReadLine(), out input) && input >= 0)
-                        return input;
-                    else Console.WriteLine("Du fååår inte ha bokstäver eller negativa tal\nFörsök igen!");
+                    input = Console.ReadLine();
+                    if (System.Text.RegularExpressions.Regex.IsMatch(input, @"\d"))
+                    {
+                        // input string contains a digit
+                        Console.WriteLine("Du fåååår inte använda siffror\nFörsök igen!");
+                    }
+                    else break;
                 }
-                else break;
+                return input;
             }
-            return input;
+            public decimal InputNumber(int i)
+            {
+                decimal input = 0;
+                while (true)
+                {
+                    if (i >= 3)
+                    {
+                        if (decimal.TryParse(Console.ReadLine(), out input) && input >= 0)
+                            return input;
+                        else Console.WriteLine("Du fååår inte ha bokstäver eller negativa tal\nFörsök igen!");
+                    }
+                    else break;
+                }
+                return input;
+            }
         }
     }
-}
